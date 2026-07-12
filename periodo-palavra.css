@@ -1,0 +1,1 @@
+.week-range{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:12px}.week-range>span{padding-bottom:13px;color:#66706a;font-size:.8rem}.week-preview{background:#edf3e9;color:#286746;padding:10px 12px;border-radius:5px;margin:10px 0 18px;font-weight:800;font-size:.8rem}@media(max-width:550px){.week-range{grid-template-columns:1fr}.week-range>span{display:none}}

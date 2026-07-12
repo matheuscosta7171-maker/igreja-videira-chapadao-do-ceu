@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#173f2b" />
+  <title>Igreja Videira — Chapadão do Céu</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="discipulados.css" />
+  <link rel="stylesheet" href="horarios.css" />
+  <link rel="stylesheet" href="enderecos.css" />
+  <style>.logo-image{width:44px;height:44px;object-fit:cover;border-radius:50%;background:#000}</style>
+  <link rel="stylesheet" href="lideranca.css" />
+  <link rel="stylesheet" href="piramide.css" />
+  <link rel="stylesheet" href="pastoral.css" />
+  <link rel="stylesheet" href="pastora-hierarquia.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Igreja Videira - início">
+      <img class="logo-image" src="logo-videira.png" alt="Logotipo Igreja Videira" />
+      <span><strong>IGREJA VIDEIRA</strong><small>Chapadão do Céu</small></span>
+    </a>
+    <button class="menu-button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    <nav class="nav">
+      <a href="#inicio">Início</a><a href="#agenda">Agenda</a><a href="#celulas">Discipuladores</a>
+      <a href="#enderecos">Endereços</a><a href="#palavra">Palavra</a><a href="#lideranca">Liderança</a><a href="#admin">Painel</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">Bem-vindo à nossa família</span>
+        <h1>Uma igreja de <em>vencedores</em>.</h1>
+        <p>Conectando pessoas a Deus, formando discípulos e vivendo o propósito em comunidade.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#agenda">Ver programação</a>
+          <a class="button secondary" href="#celulas">Encontrar uma célula</a>
+        </div>
+      </div>
+      <aside class="next-event">
+        <span>PRÓXIMO ENCONTRO</span>
+        <strong>Culto de Celebração</strong>
+        <p>Domingo • 18h30</p>
+        <div class="countdown" id="countdown">Esperamos por você!</div>
+      </aside>
+    </section>
+
+    <section class="section address-section" id="enderecos">
+      <div class="section-heading"><div><span class="eyebrow">Onde nos encontramos</span><h2>Endereços das células</h2><p class="section-intro">Escolha um líder para consultar o dia, horário e local da célula.</p></div><span class="test-badge">DADOS DE TESTE</span></div>
+      <div class="address-layout">
+        <div class="address-picker"><label for="leaderAddressSelect">Selecione o líder</label><select id="leaderAddressSelect"><optgroup label="Discipulado Matheus"><option value="matheus-costa">Matheus Costa</option><option value="matheus-victor">Matheus Victor</option><option value="daniel">Daniel</option><option value="isadora">Isadora</option></optgroup><optgroup label="Discipulado Klebson"><option value="klebson">Klebson</option><option value="rhayngrid">Rhayngrid</option><option value="wiliane">Wiliane</option></optgroup><optgroup label="Discipulado Antônio"><option value="antonio">Antônio</option><option value="humberto">Humberto</option><option value="jose-nivolan">José Nivolan</option><option value="elimar">Elimar</option></optgroup><optgroup label="Discipulado Edson"><option value="edson">Edson</option><option value="messias">Messias</option><option value="enio">Enio</option><option value="celio">Celio</option></optgroup></select><p>Os endereços exibidos nesta etapa são apenas exemplos e não representam locais reais.</p></div>
+        <article class="address-result"><span class="address-pin">⌖</span><div><span class="tag" id="addressGroup">DISCIPULADO MATHEUS</span><h3 id="addressLeader">Célula Matheus Costa</h3><p class="address-line" id="addressLine">Rua Exemplo, 100 — Bairro Teste</p><div class="address-meta"><span id="addressDay">Sábado</span><strong id="addressTime">19h30</strong></div><small>Endereço provisório para teste</small></div></article>
+      </div>
+    </section>
+
+    <section class="quick-links" aria-label="Acessos rápidos">
+      <a href="#agenda"><i>◷</i><span><strong>Agenda</strong><small>Veja a programação</small></span></a>
+      <a href="#palavra"><i>▤</i><span><strong>Palavra</strong><small>Esboço da semana</small></span></a>
+      <a href="#celulas"><i>⌂</i><span><strong>Discipulados</strong><small>Conheça os líderes</small></span></a>
+      <a href="#contato"><i>♡</i><span><strong>Oração</strong><small>Envie seu pedido</small></span></a>
+    </section>
+
+    <section class="vision-section" id="visao">
+      <div class="vision-symbol"><img src="logo-videira.png" alt="Logotipo da Igreja Videira" /></div>
+      <div class="vision-content"><span class="eyebrow">Nossa visão</span><h2>Uma igreja de vencedores</h2><blockquote>“O nosso encargo é edificar uma igreja de vencedores, em que cada membro é um sacerdote e cada casa, uma extensão da igreja, conquistando, assim, a nossa geração para Cristo por meio das células que se multiplicam.”</blockquote><div class="vision-pillars"><span><b>01</b>Cada membro, um sacerdote</span><span><b>02</b>Cada casa, uma extensão da igreja</span><span><b>03</b>Células que se multiplicam</span></div></div>
+    </section>
+
+    <section class="section" id="agenda">
+      <div class="section-heading"><div><span class="eyebrow">Fique por dentro</span><h2>Programação da semana</h2></div><button class="text-button" id="calendarButton">Ver mês completo →</button></div>
+      <div class="schedule-grid">
+        <article class="schedule-card featured"><div class="date"><b>02</b><span>EVENTO</span></div><div><span class="tag">RL CAMP</span><h3 id="eventTitleCard">RL Camp</h3><p id="eventDetailsCard">Dia 2 • Horário a confirmar</p></div></article>
+        <article class="schedule-card"><div class="date"><b>DOM</b><span>SEMANAL</span></div><div><span class="tag">CELEBRAÇÃO</span><h3>Culto de Celebração</h3><p>Todos os domingos • 18h30</p></div></article>
+        <article class="schedule-card"><div class="date"><b>+</b><span>EM BREVE</span></div><div><span class="tag">AGENDA</span><h3>Novas programações</h3><p>Outros eventos serão adicionados aqui.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section soft" id="palavra">
+      <div class="word-card">
+        <div><span class="eyebrow">Palavra da semana</span><h2 id="wordTitle">Aguardando novo esboço</h2><blockquote id="wordVerse">O conteúdo será publicado pelo desenvolvedor.</blockquote><p id="wordSummary">Use o Painel do Desenvolvedor para adicionar o tema, texto bíblico e esboço desta semana.</p><button class="button primary" data-modal="word">Ler esboço completo</button></div>
+        <div class="verse-art"><span>JOÃO</span><strong>15</strong><small>PERMANEÇA • CRESÇA • FRUTIFIQUE</small></div>
+      </div>
+    </section>
+
+    <section class="section" id="celulas">
+      <div class="section-heading"><div><span class="eyebrow">Cuidado e crescimento</span><h2>Discipuladores e seus líderes</h2><p class="section-intro">Selecione um discipulado para conhecer seus líderes.</p></div></div>
+      <div class="cell-filters" role="tablist" aria-label="Selecionar discipulado"><button class="filter active" data-filter="matheus">Discipulado Matheus</button><button class="filter" data-filter="klebson">Discipulado Klebson</button><button class="filter" data-filter="antonio">Discipulado Antônio</button><button class="filter" data-filter="edson">Discipulado Edson</button></div>
+      <div class="discipleship-title"><span id="selectedDiscipleship">Discipulado Matheus</span><small>LÍDERES</small></div>
+      <div class="cells-grid leaders-grid">
+        <article class="cell-card leader-card" data-group="matheus"><span class="leader-initial">MC</span><span class="tag">LÍDER</span><h3>Matheus Costa</h3><small class="meeting-time">Sábado • 19h30</small></article>
+        <article class="cell-card leader-card" data-group="matheus"><span class="leader-initial">MV</span><span class="tag">LÍDER</span><h3>Matheus Victor</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card" data-group="matheus"><span class="leader-initial">DA</span><span class="tag">LÍDER</span><h3>Daniel</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card" data-group="matheus"><span class="leader-initial">IS</span><span class="tag">LÍDER</span><h3>Isadora</h3><small class="meeting-time">Sábado • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="klebson"><span class="leader-initial">KL</span><span class="tag">LÍDER</span><h3>Klebson</h3><small class="meeting-time">Sábado • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="klebson"><span class="leader-initial">RH</span><span class="tag">LÍDER</span><h3>Rhayngrid</h3><small class="meeting-time">Sábado • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="klebson"><span class="leader-initial">WI</span><span class="tag">LÍDER</span><h3>Wiliane</h3><small class="meeting-time">Sábado • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="antonio"><span class="leader-initial">AN</span><span class="tag">LÍDER</span><h3>Antônio</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="antonio"><span class="leader-initial">HU</span><span class="tag">LÍDER</span><h3>Humberto</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="antonio"><span class="leader-initial">JN</span><span class="tag">LÍDER</span><h3>José Nivolan</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="antonio"><span class="leader-initial">EL</span><span class="tag">LÍDER</span><h3>Elimar</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="edson"><span class="leader-initial">ED</span><span class="tag">LÍDER</span><h3>Edson</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="edson"><span class="leader-initial">ME</span><span class="tag">LÍDER</span><h3>Messias</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="edson"><span class="leader-initial">EN</span><span class="tag">LÍDER</span><h3>Enio</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card hidden" data-group="edson"><span class="leader-initial">CE</span><span class="tag">LÍDER</span><h3>Celio</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+      </div>
+    </section>
+
+    <section class="section dark" id="lideranca">
+      <span class="eyebrow">Quem cuida de nós</span><h2>Nossa liderança</h2>
+      <p class="lead">Em breve, aqui estarão as fotos e apresentações do pastor, da pastora, dos discipuladores e líderes da Igreja Videira.</p>
+      <div class="pastoral-leaders"><div><span>JR</span><strong>Jozzueh Ruffah</strong><small>Pastor</small></div><div><span>JC</span><strong>Joarla Castro</strong><small>Pastora</small></div></div>
+      <div class="leadership-directory"><span class="eyebrow">Discipuladores e líderes</span><div class="leadership-filters" role="tablist"><button class="leadership-filter active" data-leadership="matheus">Matheus</button><button class="leadership-filter" data-leadership="klebson">Klebson</button><button class="leadership-filter" data-leadership="antonio">Antônio</button><button class="leadership-filter" data-leadership="edson">Edson</button></div><div class="leadership-group">
+        <article class="leadership-person discipleship-head" data-leadership-group="matheus"><span>MC</span><div><small>DISCIPULADOR</small><strong>Matheus Costa</strong></div></article><article class="leadership-person" data-leadership-group="matheus"><span>MC</span><div><small>LÍDER</small><strong>Matheus Costa</strong></div></article><article class="leadership-person" data-leadership-group="matheus"><span>MV</span><div><small>LÍDER</small><strong>Matheus Victor</strong></div></article><article class="leadership-person" data-leadership-group="matheus"><span>DA</span><div><small>LÍDER</small><strong>Daniel</strong></div></article><article class="leadership-person" data-leadership-group="matheus"><span>IS</span><div><small>LÍDER</small><strong>Isadora</strong></div></article>
+        <article class="leadership-person discipleship-head hidden" data-leadership-group="klebson"><span>KL</span><div><small>DISCIPULADOR</small><strong>Klebson</strong></div></article><article class="leadership-person hidden" data-leadership-group="klebson"><span>KL</span><div><small>LÍDER</small><strong>Klebson</strong></div></article><article class="leadership-person hidden" data-leadership-group="klebson"><span>RH</span><div><small>LÍDER</small><strong>Rhayngrid</strong></div></article><article class="leadership-person hidden" data-leadership-group="klebson"><span>WI</span><div><small>LÍDER</small><strong>Wiliane</strong></div></article>
+        <article class="leadership-person discipleship-head hidden" data-leadership-group="antonio"><span>AN</span><div><small>DISCIPULADOR</small><strong>Antônio</strong></div></article><article class="leadership-person hidden" data-leadership-group="antonio"><span>AN</span><div><small>LÍDER</small><strong>Antônio</strong></div></article><article class="leadership-person hidden" data-leadership-group="antonio"><span>HU</span><div><small>LÍDER</small><strong>Humberto</strong></div></article><article class="leadership-person hidden" data-leadership-group="antonio"><span>JN</span><div><small>LÍDER</small><strong>José Nivolan</strong></div></article><article class="leadership-person hidden" data-leadership-group="antonio"><span>EL</span><div><small>LÍDER</small><strong>Elimar</strong></div></article>
+        <article class="leadership-person discipleship-head hidden" data-leadership-group="edson"><span>ED</span><div><small>DISCIPULADOR</small><strong>Edson</strong></div></article><article class="leadership-person hidden" data-leadership-group="edson"><span>ED</span><div><small>LÍDER</small><strong>Edson</strong></div></article><article class="leadership-person hidden" data-leadership-group="edson"><span>ME</span><div><small>LÍDER</small><strong>Messias</strong></div></article><article class="leadership-person hidden" data-leadership-group="edson"><span>EN</span><div><small>LÍDER</small><strong>Enio</strong></div></article><article class="leadership-person hidden" data-leadership-group="edson"><span>CE</span><div><small>LÍDER</small><strong>Celio</strong></div></article>
+      </div></div>
+    </section>
+    <section class="section admin-section" id="admin"><div class="section-heading"><div><span class="eyebrow">Área do desenvolvedor</span><h2>Atualizar conteúdo</h2></div><span class="saved-status" id="savedStatus">Dados salvos neste navegador</span></div><div class="admin-grid"><form class="admin-card" id="wordForm"><h3>Palavra da semana</h3><label>Tema<input id="adminWordTitle" placeholder="Ex.: Firmados na Videira" required></label><label>Texto bíblico<input id="adminWordVerse" placeholder="Ex.: João 15:5"></label><label>Resumo<textarea id="adminWordSummary" rows="3" placeholder="Breve apresentação da palavra"></textarea></label><label>Esboço completo<textarea id="adminWordOutline" rows="7" placeholder="Digite os tópicos do esboço"></textarea></label><button class="button primary" type="submit">Publicar palavra</button></form><form class="admin-card" id="eventForm"><h3>Próximo evento</h3><label>Nome do evento<input id="adminEventTitle" value="RL Camp" required></label><label>Data / informação<input id="adminEventDetails" value="Dia 2 • Horário a confirmar"></label><button class="button primary" type="submit">Atualizar evento</button><button class="reset-button" id="resetContent" type="button">Restaurar dados de teste</button></form></div></section>
+  </main>
+
+  <footer id="contato"><div class="brand"><img class="logo-image" src="logo-videira.png" alt="Logotipo Igreja Videira" /><span><strong>IGREJA VIDEIRA</strong><small>Chapadão do Céu — GO</small></span></div><p>Uma igreja de vencedores.</p><p class="demo-note">Versão inicial demonstrativa • Horários e informações poderão ser atualizados no painel.</p></footer>
+
+  <div class="modal" id="modal" aria-hidden="true"><div class="modal-box"><button class="modal-close" aria-label="Fechar">×</button><div id="modalContent"></div></div></div>
+  <link rel="stylesheet" href="visao.css" />
+  <link rel="stylesheet" href="logo-oficial.css" />
+  <script src="app.js"></script>
+  <script src="pastora-dados.js"></script>
+  <link rel="stylesheet" href="agenda2026.css" />
+  <script src="agenda2026.js"></script>
+  <script src="agenda-resumo.js"></script>
+  <link rel="stylesheet" href="palavra-arquivos.css" />
+  <link rel="stylesheet" href="periodo-palavra.css" />
+  <script src="palavra-arquivos.js"></script>
+  <link rel="stylesheet" href="arquivo-palavras.css" />
+  <script src="arquivo-palavras.js"></script>
+</body>
+</html>
