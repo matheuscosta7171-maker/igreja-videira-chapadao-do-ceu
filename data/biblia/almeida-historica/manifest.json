@@ -1,0 +1,615 @@
+{
+  "traducao": "Almeida Histórica",
+  "abreviacao": "AH",
+  "tituloOriginal": "A Biblia Sagrada, Contendo o Velho e o Novo Testamento",
+  "tradutor": "João Ferreira d’Almeida (1628–1691)",
+  "edicao": "Edição Revista e Corrigida, Lisboa, 1911; primeira edição, 1900",
+  "idioma": "Português histórico",
+  "fonte": "Project Gutenberg, eBook nº 62383",
+  "urlFonte": "https://www.gutenberg.org/ebooks/62383",
+  "licenca": "Domínio público nos EUA conforme o Project Gutenberg; no Brasil, prazo patrimonial expirado conforme arts. 41 e 45 da Lei 9.610/1998.",
+  "atribuicao": "A atribuição ao Project Gutenberg não é exigida para uso não comercial, mas é mantida por transparência e rastreabilidade.",
+  "dataImportacao": "2026-07-14",
+  "arquivoFonteSha256": "6d18d46017214e4eb4396fe73c8aaf85a687ef034edc91d7612aef732967aab3",
+  "quantidadeLivros": 66,
+  "quantidadeCapitulos": 1189,
+  "quantidadeVersiculos": 31105,
+  "livrosAntigoTestamento": 39,
+  "livrosNovoTestamento": 27,
+  "livros": [
+    {
+      "id": "GEN",
+      "nome": "Gênesis",
+      "abreviacao": "Gn",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 50,
+      "arquivo": "antigo-testamento/GEN.json"
+    },
+    {
+      "id": "EXO",
+      "nome": "Êxodo",
+      "abreviacao": "Êx",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 40,
+      "arquivo": "antigo-testamento/EXO.json"
+    },
+    {
+      "id": "LEV",
+      "nome": "Levítico",
+      "abreviacao": "Lv",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 27,
+      "arquivo": "antigo-testamento/LEV.json"
+    },
+    {
+      "id": "NUM",
+      "nome": "Números",
+      "abreviacao": "Nm",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 36,
+      "arquivo": "antigo-testamento/NUM.json"
+    },
+    {
+      "id": "DEU",
+      "nome": "Deuteronômio",
+      "abreviacao": "Dt",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 34,
+      "arquivo": "antigo-testamento/DEU.json"
+    },
+    {
+      "id": "JOS",
+      "nome": "Josué",
+      "abreviacao": "Js",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 24,
+      "arquivo": "antigo-testamento/JOS.json"
+    },
+    {
+      "id": "JDG",
+      "nome": "Juízes",
+      "abreviacao": "Jz",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 21,
+      "arquivo": "antigo-testamento/JDG.json"
+    },
+    {
+      "id": "RUT",
+      "nome": "Rute",
+      "abreviacao": "Rt",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 4,
+      "arquivo": "antigo-testamento/RUT.json"
+    },
+    {
+      "id": "1SA",
+      "nome": "1 Samuel",
+      "abreviacao": "1Sm",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 31,
+      "arquivo": "antigo-testamento/1SA.json"
+    },
+    {
+      "id": "2SA",
+      "nome": "2 Samuel",
+      "abreviacao": "2Sm",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 24,
+      "arquivo": "antigo-testamento/2SA.json"
+    },
+    {
+      "id": "1KI",
+      "nome": "1 Reis",
+      "abreviacao": "1Rs",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 22,
+      "arquivo": "antigo-testamento/1KI.json"
+    },
+    {
+      "id": "2KI",
+      "nome": "2 Reis",
+      "abreviacao": "2Rs",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 25,
+      "arquivo": "antigo-testamento/2KI.json"
+    },
+    {
+      "id": "1CH",
+      "nome": "1 Crônicas",
+      "abreviacao": "1Cr",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 29,
+      "arquivo": "antigo-testamento/1CH.json"
+    },
+    {
+      "id": "2CH",
+      "nome": "2 Crônicas",
+      "abreviacao": "2Cr",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 36,
+      "arquivo": "antigo-testamento/2CH.json"
+    },
+    {
+      "id": "EZR",
+      "nome": "Esdras",
+      "abreviacao": "Ed",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 10,
+      "arquivo": "antigo-testamento/EZR.json"
+    },
+    {
+      "id": "NEH",
+      "nome": "Neemias",
+      "abreviacao": "Ne",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 13,
+      "arquivo": "antigo-testamento/NEH.json"
+    },
+    {
+      "id": "EST",
+      "nome": "Ester",
+      "abreviacao": "Et",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 10,
+      "arquivo": "antigo-testamento/EST.json"
+    },
+    {
+      "id": "JOB",
+      "nome": "Jó",
+      "abreviacao": "Jó",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 42,
+      "arquivo": "antigo-testamento/JOB.json"
+    },
+    {
+      "id": "PSA",
+      "nome": "Salmos",
+      "abreviacao": "Sl",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 150,
+      "arquivo": "antigo-testamento/PSA.json"
+    },
+    {
+      "id": "PRO",
+      "nome": "Provérbios",
+      "abreviacao": "Pv",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 31,
+      "arquivo": "antigo-testamento/PRO.json"
+    },
+    {
+      "id": "ECC",
+      "nome": "Eclesiastes",
+      "abreviacao": "Ec",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 12,
+      "arquivo": "antigo-testamento/ECC.json"
+    },
+    {
+      "id": "SNG",
+      "nome": "Cânticos",
+      "abreviacao": "Ct",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 8,
+      "arquivo": "antigo-testamento/SNG.json"
+    },
+    {
+      "id": "ISA",
+      "nome": "Isaías",
+      "abreviacao": "Is",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 66,
+      "arquivo": "antigo-testamento/ISA.json"
+    },
+    {
+      "id": "JER",
+      "nome": "Jeremias",
+      "abreviacao": "Jr",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 52,
+      "arquivo": "antigo-testamento/JER.json"
+    },
+    {
+      "id": "LAM",
+      "nome": "Lamentações",
+      "abreviacao": "Lm",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 5,
+      "arquivo": "antigo-testamento/LAM.json"
+    },
+    {
+      "id": "EZK",
+      "nome": "Ezequiel",
+      "abreviacao": "Ez",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 48,
+      "arquivo": "antigo-testamento/EZK.json"
+    },
+    {
+      "id": "DAN",
+      "nome": "Daniel",
+      "abreviacao": "Dn",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 12,
+      "arquivo": "antigo-testamento/DAN.json"
+    },
+    {
+      "id": "HOS",
+      "nome": "Oséias",
+      "abreviacao": "Os",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 14,
+      "arquivo": "antigo-testamento/HOS.json"
+    },
+    {
+      "id": "JOL",
+      "nome": "Joel",
+      "abreviacao": "Jl",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 3,
+      "arquivo": "antigo-testamento/JOL.json"
+    },
+    {
+      "id": "AMO",
+      "nome": "Amós",
+      "abreviacao": "Am",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 9,
+      "arquivo": "antigo-testamento/AMO.json"
+    },
+    {
+      "id": "OBA",
+      "nome": "Obadias",
+      "abreviacao": "Ob",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 1,
+      "arquivo": "antigo-testamento/OBA.json"
+    },
+    {
+      "id": "JON",
+      "nome": "Jonas",
+      "abreviacao": "Jn",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 4,
+      "arquivo": "antigo-testamento/JON.json"
+    },
+    {
+      "id": "MIC",
+      "nome": "Miqueias",
+      "abreviacao": "Mq",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 7,
+      "arquivo": "antigo-testamento/MIC.json"
+    },
+    {
+      "id": "NAM",
+      "nome": "Naum",
+      "abreviacao": "Na",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 3,
+      "arquivo": "antigo-testamento/NAM.json"
+    },
+    {
+      "id": "HAB",
+      "nome": "Habacuque",
+      "abreviacao": "Hc",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 3,
+      "arquivo": "antigo-testamento/HAB.json"
+    },
+    {
+      "id": "ZEP",
+      "nome": "Sofonias",
+      "abreviacao": "Sf",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 3,
+      "arquivo": "antigo-testamento/ZEP.json"
+    },
+    {
+      "id": "HAG",
+      "nome": "Ageu",
+      "abreviacao": "Ag",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 2,
+      "arquivo": "antigo-testamento/HAG.json"
+    },
+    {
+      "id": "ZEC",
+      "nome": "Zacarias",
+      "abreviacao": "Zc",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 14,
+      "arquivo": "antigo-testamento/ZEC.json"
+    },
+    {
+      "id": "MAL",
+      "nome": "Malaquias",
+      "abreviacao": "Ml",
+      "testamento": "Antigo Testamento",
+      "pasta": "antigo-testamento",
+      "capitulos": 4,
+      "arquivo": "antigo-testamento/MAL.json"
+    },
+    {
+      "id": "MAT",
+      "nome": "Mateus",
+      "abreviacao": "Mt",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 28,
+      "arquivo": "novo-testamento/MAT.json"
+    },
+    {
+      "id": "MRK",
+      "nome": "Marcos",
+      "abreviacao": "Mc",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 16,
+      "arquivo": "novo-testamento/MRK.json"
+    },
+    {
+      "id": "LUK",
+      "nome": "Lucas",
+      "abreviacao": "Lc",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 24,
+      "arquivo": "novo-testamento/LUK.json"
+    },
+    {
+      "id": "JHN",
+      "nome": "João",
+      "abreviacao": "Jo",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 21,
+      "arquivo": "novo-testamento/JHN.json"
+    },
+    {
+      "id": "ACT",
+      "nome": "Atos",
+      "abreviacao": "At",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 28,
+      "arquivo": "novo-testamento/ACT.json"
+    },
+    {
+      "id": "ROM",
+      "nome": "Romanos",
+      "abreviacao": "Rm",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 16,
+      "arquivo": "novo-testamento/ROM.json"
+    },
+    {
+      "id": "1CO",
+      "nome": "1 Coríntios",
+      "abreviacao": "1Co",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 16,
+      "arquivo": "novo-testamento/1CO.json"
+    },
+    {
+      "id": "2CO",
+      "nome": "2 Coríntios",
+      "abreviacao": "2Co",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 13,
+      "arquivo": "novo-testamento/2CO.json"
+    },
+    {
+      "id": "GAL",
+      "nome": "Gálatas",
+      "abreviacao": "Gl",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 6,
+      "arquivo": "novo-testamento/GAL.json"
+    },
+    {
+      "id": "EPH",
+      "nome": "Efésios",
+      "abreviacao": "Ef",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 6,
+      "arquivo": "novo-testamento/EPH.json"
+    },
+    {
+      "id": "PHP",
+      "nome": "Filipenses",
+      "abreviacao": "Fp",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 4,
+      "arquivo": "novo-testamento/PHP.json"
+    },
+    {
+      "id": "COL",
+      "nome": "Colossenses",
+      "abreviacao": "Cl",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 4,
+      "arquivo": "novo-testamento/COL.json"
+    },
+    {
+      "id": "1TH",
+      "nome": "1 Tessalonicenses",
+      "abreviacao": "1Ts",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 5,
+      "arquivo": "novo-testamento/1TH.json"
+    },
+    {
+      "id": "2TH",
+      "nome": "2 Tessalonicenses",
+      "abreviacao": "2Ts",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 3,
+      "arquivo": "novo-testamento/2TH.json"
+    },
+    {
+      "id": "1TI",
+      "nome": "1 Timóteo",
+      "abreviacao": "1Tm",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 6,
+      "arquivo": "novo-testamento/1TI.json"
+    },
+    {
+      "id": "2TI",
+      "nome": "2 Timóteo",
+      "abreviacao": "2Tm",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 4,
+      "arquivo": "novo-testamento/2TI.json"
+    },
+    {
+      "id": "TIT",
+      "nome": "Tito",
+      "abreviacao": "Tt",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 3,
+      "arquivo": "novo-testamento/TIT.json"
+    },
+    {
+      "id": "PHM",
+      "nome": "Filemom",
+      "abreviacao": "Fm",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 1,
+      "arquivo": "novo-testamento/PHM.json"
+    },
+    {
+      "id": "HEB",
+      "nome": "Hebreus",
+      "abreviacao": "Hb",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 13,
+      "arquivo": "novo-testamento/HEB.json"
+    },
+    {
+      "id": "JAS",
+      "nome": "Tiago",
+      "abreviacao": "Tg",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 5,
+      "arquivo": "novo-testamento/JAS.json"
+    },
+    {
+      "id": "1PE",
+      "nome": "1 Pedro",
+      "abreviacao": "1Pe",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 5,
+      "arquivo": "novo-testamento/1PE.json"
+    },
+    {
+      "id": "2PE",
+      "nome": "2 Pedro",
+      "abreviacao": "2Pe",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 3,
+      "arquivo": "novo-testamento/2PE.json"
+    },
+    {
+      "id": "1JN",
+      "nome": "1 João",
+      "abreviacao": "1Jo",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 5,
+      "arquivo": "novo-testamento/1JN.json"
+    },
+    {
+      "id": "2JN",
+      "nome": "2 João",
+      "abreviacao": "2Jo",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 1,
+      "arquivo": "novo-testamento/2JN.json"
+    },
+    {
+      "id": "3JN",
+      "nome": "3 João",
+      "abreviacao": "3Jo",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 1,
+      "arquivo": "novo-testamento/3JN.json"
+    },
+    {
+      "id": "JUD",
+      "nome": "Judas",
+      "abreviacao": "Jd",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 1,
+      "arquivo": "novo-testamento/JUD.json"
+    },
+    {
+      "id": "REV",
+      "nome": "Apocalipse",
+      "abreviacao": "Ap",
+      "testamento": "Novo Testamento",
+      "pasta": "novo-testamento",
+      "capitulos": 22,
+      "arquivo": "novo-testamento/REV.json"
+    }
+  ]
+}
