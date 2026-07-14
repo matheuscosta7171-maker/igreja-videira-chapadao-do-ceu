@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="piramide.css" />
   <link rel="stylesheet" href="pastoral.css" />
   <link rel="stylesheet" href="pastora-hierarquia.css" />
+  <link rel="stylesheet" href="home.css" />
 </head>
 <body>
   <header class="topbar">
@@ -30,22 +31,56 @@
   </header>
 
   <main id="inicio">
-    <section class="hero">
-      <div class="hero-content">
-        <span class="eyebrow">Bem-vindo à nossa família</span>
-        <h1>Uma igreja de <em>vencedores</em>.</h1>
-        <p>Conectando pessoas a Deus, formando discípulos e vivendo o propósito em comunidade.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#agenda">Ver programação</a>
-          <a class="button secondary" href="#celulas">Encontrar uma célula</a>
+    <section class="home-carousel" aria-label="Destaques da Igreja Videira" aria-roledescription="carrossel">
+      <div class="carousel-layout">
+        <div class="carousel-stage" id="highlightCarousel">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrack"></div>
+          </div>
+          <button class="carousel-arrow carousel-prev" type="button" aria-label="Destaque anterior">‹</button>
+          <button class="carousel-arrow carousel-next" type="button" aria-label="Próximo destaque">›</button>
+          <div class="carousel-dots" id="carouselDots" aria-label="Selecionar destaque"></div>
+          <p class="carousel-status sr-only" id="carouselStatus" aria-live="polite"></p>
         </div>
+        <aside class="carousel-news-list" id="carouselNewsList" aria-label="Outros destaques"></aside>
       </div>
-      <aside class="next-event">
-        <span>PRÓXIMO ENCONTRO</span>
-        <strong>Culto de Celebração</strong>
-        <p>Domingo • 18h30</p>
-        <div class="countdown" id="countdown">Esperamos por você!</div>
-      </aside>
+    </section>
+
+    <section class="home-welcome home-reveal" aria-labelledby="welcomeTitle">
+      <span class="home-kicker">Você é bem-vindo</span>
+      <h1 id="welcomeTitle">Bem-vindo à Igreja Videira</h1>
+      <p>Somos uma igreja de discípulos que vivem para amar a Deus, servir pessoas e anunciar o Evangelho. Aqui você encontra comunhão, crescimento espiritual e uma família para caminhar junto.</p>
+      <div class="welcome-statement">Uma igreja em células, vivendo o propósito de Deus.</div>
+      <a class="home-button home-button-outline" href="#visao">Conheça nossa igreja</a>
+    </section>
+
+    <section class="home-vision home-reveal" id="visao" aria-labelledby="visionTitle">
+      <div class="home-section-heading">
+        <span class="home-kicker">Quem somos</span>
+        <h2 id="visionTitle">Nossa Visão</h2>
+        <p>O nosso encargo é edificar uma igreja de vencedores, onde cada membro é um sacerdote e cada casa, uma extensão da igreja, conquistando, assim, a nossa geração para Cristo através das células que se multiplicam.</p>
+      </div>
+      <div class="vision-principles">
+        <article class="principle-card home-reveal"><span aria-hidden="true">✦</span><h3>Cada membro é um ministro</h3><p>Todos são chamados para servir e manifestar a vida de Cristo.</p></article>
+        <article class="principle-card home-reveal"><span aria-hidden="true">⌂</span><h3>Cada casa é uma extensão da igreja</h3><p>Lares abertos para comunhão, cuidado e crescimento.</p></article>
+        <article class="principle-card home-reveal"><span aria-hidden="true">◎</span><h3>Fazer discípulos</h3><p>Caminhar com pessoas e ajudá-las a crescer na fé.</p></article>
+        <article class="principle-card home-reveal"><span aria-hidden="true">↗</span><h3>Multiplicar células</h3><p>Levar a vida da igreja a novos lares e novas pessoas.</p></article>
+        <article class="principle-card home-reveal"><span aria-hidden="true">♡</span><h3>Alcançar vidas para Jesus</h3><p>Anunciar o Evangelho com amor, serviço e propósito.</p></article>
+      </div>
+    </section>
+
+    <section class="home-meetings home-reveal" aria-labelledby="meetingsTitle">
+      <div class="home-section-heading">
+        <span class="home-kicker">Caminhe conosco</span>
+        <h2 id="meetingsTitle">Nossos Encontros da Semana</h2>
+        <p>Momentos preparados para comunhão, Palavra, oração e celebração.</p>
+      </div>
+      <div class="meeting-grid" id="weeklyMeetings"></div>
+    </section>
+
+    <section class="home-invitation home-reveal" aria-labelledby="invitationTitle">
+      <div><span class="home-kicker">Igreja Videira</span><h2 id="invitationTitle">Você é nosso convidado</h2><p>Venha viver momentos de fé, comunhão e transformação conosco. Será uma alegria receber você e sua família na Igreja Videira.</p></div>
+      <a class="home-button home-button-light" href="#agenda">Ver programação</a>
     </section>
 
     <section class="section address-section" id="enderecos">
@@ -54,18 +89,6 @@
         <div class="address-picker"><label for="leaderAddressSelect">Selecione o líder</label><select id="leaderAddressSelect"><optgroup label="Discipulado Matheus"><option value="matheus-costa">Matheus Costa</option><option value="matheus-victor">Matheus Victor</option><option value="daniel">Daniel</option><option value="isadora">Isadora</option></optgroup><optgroup label="Discipulado Klebson"><option value="klebson">Klebson</option><option value="rhayngrid">Rhayngrid</option><option value="wiliane">Wiliane</option></optgroup><optgroup label="Discipulado Antônio"><option value="antonio">Antônio</option><option value="humberto">Humberto</option><option value="jose-nivolan">José Nivolan</option><option value="elimar">Elimar</option></optgroup><optgroup label="Discipulado Edson"><option value="edson">Edson</option><option value="messias">Messias</option><option value="enio">Enio</option><option value="celio">Celio</option></optgroup></select><p>Os endereços exibidos nesta etapa são apenas exemplos e não representam locais reais.</p></div>
         <article class="address-result"><span class="address-pin">⌖</span><div><span class="tag" id="addressGroup">DISCIPULADO MATHEUS</span><h3 id="addressLeader">Célula Matheus Costa</h3><p class="address-line" id="addressLine">Rua Exemplo, 100 — Bairro Teste</p><div class="address-meta"><span id="addressDay">Sábado</span><strong id="addressTime">19h30</strong></div><small>Endereço provisório para teste</small></div></article>
       </div>
-    </section>
-
-    <section class="quick-links" aria-label="Acessos rápidos">
-      <a href="#agenda"><i>◷</i><span><strong>Agenda</strong><small>Veja a programação</small></span></a>
-      <a href="#palavra"><i>▤</i><span><strong>Palavra</strong><small>Esboço da semana</small></span></a>
-      <a href="#celulas"><i>⌂</i><span><strong>Discipulados</strong><small>Conheça os líderes</small></span></a>
-      <a href="#contato"><i>♡</i><span><strong>Oração</strong><small>Envie seu pedido</small></span></a>
-    </section>
-
-    <section class="vision-section" id="visao">
-      <div class="vision-symbol"><img src="logo-videira.png" alt="Logotipo da Igreja Videira" /></div>
-      <div class="vision-content"><span class="eyebrow">Nossa visão</span><h2>Uma igreja de vencedores</h2><blockquote>“O nosso encargo é edificar uma igreja de vencedores, em que cada membro é um sacerdote e cada casa, uma extensão da igreja, conquistando, assim, a nossa geração para Cristo por meio das células que se multiplicam.”</blockquote><div class="vision-pillars"><span><b>01</b>Cada membro, um sacerdote</span><span><b>02</b>Cada casa, uma extensão da igreja</span><span><b>03</b>Células que se multiplicam</span></div></div>
     </section>
 
     <section class="section" id="agenda">
@@ -89,9 +112,9 @@
       <div class="cell-filters" role="tablist" aria-label="Selecionar discipulado"><button class="filter active" data-filter="matheus">Discipulado Matheus</button><button class="filter" data-filter="klebson">Discipulado Klebson</button><button class="filter" data-filter="antonio">Discipulado Antônio</button><button class="filter" data-filter="edson">Discipulado Edson</button></div>
       <div class="discipleship-title"><span id="selectedDiscipleship">Discipulado Matheus</span><small>LÍDERES</small></div>
       <div class="cells-grid leaders-grid">
-        <article class="cell-card leader-card" data-group="matheus"><span class="leader-initial">MC</span><span class="tag">LÍDER</span><h3>Matheus Costa</h3><small class="meeting-time">Sábado • 19h30</small></article>
-        <article class="cell-card leader-card" data-group="matheus"><span class="leader-initial">MV</span><span class="tag">LÍDER</span><h3>Matheus Victor</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
-        <article class="cell-card leader-card" data-group="matheus"><span class="leader-initial">DA</span><span class="tag">LÍDER</span><h3>Daniel</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card" data-group="matheus" data-leader-id="matheus-costa"><span class="leader-initial">MC</span><span class="tag">LÍDER</span><h3>Matheus Costa</h3><small class="meeting-time">Sábado • 19h30</small></article>
+        <article class="cell-card leader-card" data-group="matheus" data-leader-id="matheus-victor"><span class="leader-initial">MV</span><span class="tag">LÍDER</span><h3>Matheus Victor</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
+        <article class="cell-card leader-card" data-group="matheus" data-leader-id="daniel"><span class="leader-initial">DA</span><span class="tag">LÍDER</span><h3>Daniel</h3><small class="meeting-time">Quarta-feira • 19h30</small></article>
         <article class="cell-card leader-card" data-group="matheus"><span class="leader-initial">IS</span><span class="tag">LÍDER</span><h3>Isadora</h3><small class="meeting-time">Sábado • 19h30</small></article>
         <article class="cell-card leader-card hidden" data-group="klebson"><span class="leader-initial">KL</span><span class="tag">LÍDER</span><h3>Klebson</h3><small class="meeting-time">Sábado • 19h30</small></article>
         <article class="cell-card leader-card hidden" data-group="klebson"><span class="leader-initial">RH</span><span class="tag">LÍDER</span><h3>Rhayngrid</h3><small class="meeting-time">Sábado • 19h30</small></article>
@@ -142,5 +165,13 @@
   <link rel="stylesheet" href="melhorias-palavra-whatsapp.css" />
   <script src="whatsapp-lideres.js"></script>
   <script src="palavra-filtros.js"></script>
+  <link rel="stylesheet" href="jejum-grupos.css" />
+  <link rel="stylesheet" href="bible.css" />
+  <link rel="stylesheet" href="bible-integration.css" />
+  <link rel="stylesheet" href="theme-blue.css" />
+  <script src="jejum-grupos.js"></script>
+  <script src="bible.js"></script>
+  <script src="bible-integration.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>
