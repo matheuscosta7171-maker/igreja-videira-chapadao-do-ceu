@@ -58,7 +58,7 @@
 
       <div class="bible-reader" id="bibleReader" role="region" aria-label="Leitura bíblica">
         <div class="bible-reader-heading">
-          <div><span id="bibleReaderTranslation">Almeida Histórica</span><h3 id="bibleReaderTitle">Carregando Bíblia...</h3></div>
+          <div><span id="bibleReaderTranslation">Almeida Histórica</span><h3 id="bibleReaderTitle">Escolha um livro e um capítulo</h3></div>
           <button type="button" id="backToBooks">Voltar aos livros</button>
         </div>
         <div class="bible-chapters" id="bibleChapters" aria-label="Capítulos"></div>
@@ -75,6 +75,22 @@
         </article>
       </div>
     </div>
+
+    <section class="bible-reading-plan" aria-labelledby="readingPlanTitle">
+      <div class="reading-plan-heading">
+        <div>
+          <span class="bible-kicker">Desafio de leitura</span>
+          <h3 id="readingPlanTitle">31 Dias Lendo o Novo Testamento</h3>
+          <p>Uma jornada diária por todos os 260 capítulos do Novo Testamento. Leia a sequência indicada e marque cada dia concluído.</p>
+        </div>
+        <div class="reading-plan-progress" aria-live="polite">
+          <strong id="readingPlanProgressText">0 de 31 dias concluídos</strong>
+          <progress id="readingPlanProgress" max="31" value="0">0%</progress>
+          <button type="button" id="resetReadingPlan">Reiniciar progresso</button>
+        </div>
+      </div>
+      <div class="reading-plan-days" id="readingPlanDays"></div>
+    </section>
 
     <div class="bible-lower-grid">
       <article class="daily-verse-card">
