@@ -6,9 +6,42 @@
   const BASE = 'data/biblia/almeida-historica';
   const SITE = 'https://matheuscosta7171-maker.github.io/igreja-videira-chapadao-do-ceu/';
   const keys = {
-    testament:'videiraBibleTestament',book:'videiraBibleBook',chapter:'videiraBibleChapter',font:'videiraBibleFontScale',favorites:'videiraBibleFavorites'
+    testament:'videiraBibleTestament',book:'videiraBibleBook',chapter:'videiraBibleChapter',font:'videiraBibleFontScale',favorites:'videiraBibleFavorites',readingPlan:'videiraBibleNt31Progress'
   };
   const dailyReferences = [['JHN',3,16],['PSA',23,1],['PHP',4,13],['PRO',3,5],['ROM',8,28],['ISA',41,10],['MAT',11,28],['JOS',1,9],['PSA',46,1],['JER',29,11]];
+  const readingPlan = [
+    {label:'Mateus 1–9',start:['MAT',1]},
+    {label:'Mateus 10–18',start:['MAT',10]},
+    {label:'Mateus 19–27',start:['MAT',19]},
+    {label:'Mateus 28 e Marcos 1–8',start:['MAT',28]},
+    {label:'Marcos 9–16 e Lucas 1',start:['MRK',9]},
+    {label:'Lucas 2–10',start:['LUK',2]},
+    {label:'Lucas 11–19',start:['LUK',11]},
+    {label:'Lucas 20–24 e João 1–4',start:['LUK',20]},
+    {label:'João 5–13',start:['JHN',5]},
+    {label:'João 14–21 e Atos 1',start:['JHN',14]},
+    {label:'Atos 2–10',start:['ACT',2]},
+    {label:'Atos 11–19',start:['ACT',11]},
+    {label:'Atos 20–27',start:['ACT',20]},
+    {label:'Atos 28 e Romanos 1–7',start:['ACT',28]},
+    {label:'Romanos 8–15',start:['ROM',8]},
+    {label:'Romanos 16 e 1 Coríntios 1–7',start:['ROM',16]},
+    {label:'1 Coríntios 8–15',start:['1CO',8]},
+    {label:'1 Coríntios 16 e 2 Coríntios 1–7',start:['1CO',16]},
+    {label:'2 Coríntios 8–13 e Gálatas 1–2',start:['2CO',8]},
+    {label:'Gálatas 3–6 e Efésios 1–4',start:['GAL',3]},
+    {label:'Efésios 5–6, Filipenses 1–4 e Colossenses 1–2',start:['EPH',5]},
+    {label:'Colossenses 3–4, 1 Tessalonicenses 1–5 e 2 Tessalonicenses 1',start:['COL',3]},
+    {label:'2 Tessalonicenses 2–3 e 1 Timóteo 1–6',start:['2TH',2]},
+    {label:'2 Timóteo 1–4, Tito 1–3 e Filemom',start:['2TI',1]},
+    {label:'Hebreus 1–8',start:['HEB',1]},
+    {label:'Hebreus 9–13 e Tiago 1–3',start:['HEB',9]},
+    {label:'Tiago 4–5, 1 Pedro 1–5 e 2 Pedro 1',start:['JAS',4]},
+    {label:'2 Pedro 2–3, 1 João 1–5 e 2 João',start:['2PE',2]},
+    {label:'3 João, Judas e Apocalipse 1–6',start:['3JN',1]},
+    {label:'Apocalipse 7–14',start:['REV',7]},
+    {label:'Apocalipse 15–22',start:['REV',15]}
+  ];
   const cache = new Map();
   let manifest = null;
   let books = [];
@@ -23,7 +56,7 @@
 
   const $ = selector => section.querySelector(selector);
   const elements = {
-    sidebar:$('#bibleSidebar'),chapters:$('#bibleChapters'),title:$('#bibleReaderTitle'),pending:$('#biblePendingState'),chapter:$('#bibleLocalChapter'),content:$('#bibleLocalContent'),credits:$('#bibleLocalCredits'),nav:$('#bibleChapterNav'),previous:$('#previousChapter'),next:$('#nextChapter'),status:$('#bibleSearchStatus'),results:$('#bibleSearchResults'),favorites:$('#bibleFavoritesList'),reader:$('#bibleReader')
+    sidebar:$('#bibleSidebar'),chapters:$('#bibleChapters'),title:$('#bibleReaderTitle'),pending:$('#biblePendingState'),chapter:$('#bibleLocalChapter'),content:$('#bibleLocalContent'),credits:$('#bibleLocalCredits'),nav:$('#bibleChapterNav'),previous:$('#previousChapter'),next:$('#nextChapter'),status:$('#bibleSearchStatus'),results:$('#bibleSearchResults'),favorites:$('#bibleFavoritesList'),reader:$('#bibleReader'),planDays:$('#readingPlanDays'),planProgress:$('#readingPlanProgress'),planProgressText:$('#readingPlanProgressText')
   };
 
   const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
@@ -90,6 +123,48 @@
     elements.chapters.innerHTML = `<h4>Escolha o capítulo</h4><div>${Array.from({length:book.capitulos},(_,index)=>`<button type="button" data-chapter="${index+1}" aria-label="${book.nome}, capítulo ${index+1}">${index+1}</button>`).join('')}</div>`;
     elements.chapters.querySelector(`[data-chapter="${activeChapter}"]`)?.classList.add('active');
   }
+
+  function showReaderPrompt(title,text) {
+    elements.pending.hidden = false;
+    elements.pending.querySelector('h4').textContent = title;
+    elements.pending.querySelector('p').textContent = text;
+    elements.pending.querySelector('[data-bible-retry]')?.remove();
+    elements.chapter.hidden = true;
+    elements.nav.hidden = true;
+  }
+
+  function showBookSelection({scroll=false,updateHash=true}={}) {
+    activeBook = null; activeBookData = null; highlightedVerse = null;
+    elements.title.textContent = 'Escolha um livro e um capítulo';
+    elements.chapters.replaceChildren(); elements.content.replaceChildren(); elements.credits.replaceChildren();
+    section.querySelectorAll('[data-book]').forEach(button=>{button.classList.remove('active');button.removeAttribute('aria-current')});
+    showReaderPrompt('Selecione um livro','Escolha um livro na lista e, em seguida, selecione o capítulo que deseja ler.');
+    elements.sidebar.classList.add('books-open'); $('#bibleBooksToggle').setAttribute('aria-expanded','true');
+    if(updateHash)history.replaceState(null,'','#biblia');
+    if(scroll)elements.sidebar.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
+  }
+
+  function selectBook(bookId,{scroll=true}={}) {
+    const book=books.find(item=>item.id===bookId);if(!book)return;
+    activeBook=book;activeBookData=null;activeChapter=1;highlightedVerse=null;
+    updateTestament(folderTestament(book));localStorage.setItem(keys.book,book.id);
+    section.querySelectorAll('[data-book]').forEach(button=>{const active=button.dataset.book===book.id;button.classList.toggle('active',active);button.setAttribute('aria-current',active?'true':'false')});
+    elements.title.textContent=book.nome;renderChapters(book);
+    showReaderPrompt('Agora escolha um capítulo',`Selecione um capítulo de ${book.nome} para abrir os versículos.`);
+    elements.sidebar.classList.remove('books-open');$('#bibleBooksToggle').setAttribute('aria-expanded','false');
+    history.replaceState(null,'','#biblia');
+    if(scroll)elements.reader.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  }
+
+  function getPlanProgress(){const saved=safeJson(localStorage.getItem(keys.readingPlan));return new Set(Array.isArray(saved)?saved.filter(day=>Number.isInteger(day)&&day>=1&&day<=31):[])}
+  function renderReadingPlan(){
+    const completed=getPlanProgress();
+    elements.planDays.innerHTML=readingPlan.map((day,index)=>{const number=index+1,done=completed.has(number);return`<article class="reading-plan-day${done?' completed':''}"><span>Dia ${String(number).padStart(2,'0')}</span><h4>${day.label}</h4><div><button type="button" data-plan-open="${number}">Ler agora</button><button type="button" data-plan-complete="${number}" aria-pressed="${done}">${done?'✓ Concluído':'Marcar concluído'}</button></div></article>`}).join('');
+    elements.planProgress.value=completed.size;elements.planProgress.textContent=`${Math.round(completed.size/31*100)}%`;
+    elements.planProgressText.textContent=`${completed.size} de 31 dias concluídos`;
+  }
+
+  function togglePlanDay(day){const completed=getPlanProgress();completed.has(day)?completed.delete(day):completed.add(day);localStorage.setItem(keys.readingPlan,JSON.stringify([...completed].sort((a,b)=>a-b)));renderReadingPlan()}
 
   function verseLink(bookId,chapter,verse=null) {
     return `${SITE}#biblia/${bookId}/${chapter}${verse?`/${verse}`:''}`;
@@ -211,15 +286,18 @@
   }
 
   section.addEventListener('click', async event => {
-    const testament=event.target.closest('[data-testament]'); if(testament){updateTestament(testament.dataset.testament);return;}
-    const book=event.target.closest('[data-book]'); if(book){await openPassage(book.dataset.book,1,null,{scroll:true});return;}
+    const testament=event.target.closest('[data-testament]'); if(testament){updateTestament(testament.dataset.testament);showBookSelection({scroll:false});return;}
+    const book=event.target.closest('[data-book]'); if(book){selectBook(book.dataset.book);return;}
     const chapter=event.target.closest('[data-chapter]'); if(chapter){await openPassage(activeBook.id,Number(chapter.dataset.chapter),null,{scroll:true});return;}
     if(event.target.closest('#previousChapter')){await moveChapter(-1);return;}
     if(event.target.closest('#nextChapter')){await moveChapter(1);return;}
-    if(event.target.closest('#backToBooks')){elements.sidebar.classList.add('books-open');$('#bibleBooksToggle').setAttribute('aria-expanded','true');elements.sidebar.scrollIntoView({block:'nearest'});return;}
+    if(event.target.closest('#backToBooks')){showBookSelection({scroll:true});return;}
     if(event.target.closest('#bibleBooksToggle')){const open=elements.sidebar.classList.toggle('books-open');$('#bibleBooksToggle').setAttribute('aria-expanded',String(open));return;}
     const retry=event.target.closest('[data-bible-retry]');if(retry){await openPassage(activeBook?.id||'JHN',activeChapter||1,highlightedVerse);return;}
     const result=event.target.closest('[data-result-book]');if(result){await openPassage(result.dataset.resultBook,Number(result.dataset.resultChapter),Number(result.dataset.resultVerse),{scroll:true});return;}
+    const planOpen=event.target.closest('[data-plan-open]');if(planOpen){const day=readingPlan[Number(planOpen.dataset.planOpen)-1];if(day)await openPassage(day.start[0],day.start[1],null,{scroll:true});return;}
+    const planComplete=event.target.closest('[data-plan-complete]');if(planComplete){togglePlanDay(Number(planComplete.dataset.planComplete));return;}
+    if(event.target.closest('#resetReadingPlan')){if(confirm('Reiniciar todo o progresso do plano de leitura?')){localStorage.removeItem(keys.readingPlan);renderReadingPlan()}return;}
     const font=event.target.closest('[data-font]');if(font){if(font.dataset.font==='decrease')fontScale-=.1;if(font.dataset.font==='increase')fontScale+=.1;if(font.dataset.font==='reset')fontScale=1;applyFont();return;}
     const verseAction=event.target.closest('.bible-api-verse [data-action]');
     if(verseAction){const verseArticle=verseAction.closest('[data-verse]');const verse=Number(verseArticle.dataset.verse);const item=activeBookData.capitulos[String(activeChapter)].find(entry=>entry.versiculo===verse);const reference=`${activeBook.nome} ${activeChapter}:${verse}`;const share=`${item.texto}\n\n${reference} — Almeida Histórica\n${verseLink(activeBook.id,activeChapter,verse)}`;if(verseAction.dataset.action==='copy')await copyText(share);if(verseAction.dataset.action==='whatsapp')window.open(`https://wa.me/?text=${encodeURIComponent(share)}`,'_blank','noopener,noreferrer');if(verseAction.dataset.action==='favorite')toggleFavorite(activeBook,activeChapter,verse);return;}
@@ -243,14 +321,13 @@
   });
 
   async function initialize() {
-    applyFont();renderFavorites();setLoading('Preparando a Bíblia completa...');
+    applyFont();renderFavorites();renderReadingPlan();setLoading('Preparando a Bíblia completa...');
     try{
       manifest=await fetchJson(`${BASE}/manifest.json`);books=manifest.livros;renderBookLists();
-      const route=location.hash.match(/^#biblia\/([^/]+)\/(\d+)(?:\/(\d+))?$/);
-      const savedBook=localStorage.getItem(keys.book);const defaultBook=books.some(book=>book.id===savedBook)?savedBook:'JHN';
-      const bookId=route?.[1]||defaultBook;const chapter=route?Number(route[2]):Number(localStorage.getItem(keys.chapter)||1);const verse=route?.[3]?Number(route[3]):null;
-      updateTestament(route?folderTestament(books.find(book=>book.id===bookId)):localStorage.getItem(keys.testament)||folderTestament(books.find(book=>book.id===bookId)),false);
-      await Promise.all([openPassage(bookId,chapter,verse,{updateHash:Boolean(route)}),renderDailyVerse()]);
+      const route=location.hash.match(/^#biblia\/([^/]+)\/(\d+)(?:\/(\d+))?$/);const routeBook=route?books.find(book=>book.id===route[1]):null;
+      updateTestament(routeBook?folderTestament(routeBook):'new',false);
+      if(route&&routeBook)await Promise.all([openPassage(route[1],Number(route[2]),route[3]?Number(route[3]):null,{updateHash:true}),renderDailyVerse()]);
+      else{showBookSelection({updateHash:false});await renderDailyVerse()}
     }catch(error){console.error(error);setError('Não foi possível preparar a Bíblia local. Verifique os arquivos do site e tente novamente.');}
   }
   function ensureInitialized(){
