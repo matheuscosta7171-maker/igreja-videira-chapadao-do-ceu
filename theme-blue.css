@@ -1,0 +1,174 @@
+:root {
+  --green: #092b4c;
+  --green2: #1769aa;
+  --lime: #72c2ef;
+  --cream: #f6faff;
+  --ink: #263746;
+  --muted: #607487;
+  --line: #d8e7f2;
+}
+
+body,
+.soft,
+#agenda,
+.address-section,
+.groups-section,
+.fasting-materials,
+.cloud-empty,
+.fasting-empty,
+.empty-archive {
+  background-color: #f6faff;
+}
+
+.topbar {
+  border-bottom-color: #d8e7f2;
+}
+
+.nav a:hover,
+.text-button,
+.tag,
+.selected-file,
+.saved-status,
+.discipleship-title small,
+.annual-heading .eyebrow,
+.month-summary button,
+.event-type,
+.week-date span,
+.cloud-date small,
+.fasting-file small,
+#fastingUploadStatus {
+  color: #1769aa;
+}
+
+.eyebrow,
+.featured .tag,
+.discipleship-head small,
+.fasting-dates {
+  color: #72c2ef;
+}
+
+.schedule-card.featured,
+.verse-art,
+.dark,
+.fasting-section,
+.fasting-hero,
+footer,
+.filter.active,
+.month-tab.active,
+.month-tab:hover,
+.address-pin,
+.attachment-button,
+.file-kind,
+.document-icon,
+.pdf-icon,
+.cloud-document > span,
+.word-filters button,
+.auth-box form button,
+.group-cards article > span {
+  background: #092b4c;
+}
+
+.leaders div,
+.pastoral-leaders > div,
+.leadership-person,
+.pastora-card,
+.pastora-hierarchy .pending-leader {
+  background: #0f3d63;
+}
+
+.leadership-person.discipleship-head,
+.pastoral-leaders > div.pastoral-active,
+.pastoral-leaders > div:hover {
+  background: #155f96;
+}
+
+.leaders span,
+.pastoral-leaders span,
+.leadership-person > span,
+.pastora-card span,
+.pastora-filter.active,
+.leadership-filter.active,
+.primary {
+  background: #72c2ef;
+  color: #092b4c;
+}
+
+.leadership-person.discipleship-head,
+.pastora-card,
+.pastoral-leaders > div.pastoral-active,
+.pastoral-leaders > div:focus,
+.leadership-person.discipleship-head {
+  border-color: #72c2ef;
+}
+
+.pastora-filter,
+.leadership-filter {
+  color: #dcebf5;
+}
+
+.dark .lead,
+.pastora-intro,
+.fasting-hero p {
+  color: #c7ddea;
+}
+
+.pastoral-leaders small,
+.leadership-person small,
+.pastora-card p,
+.pastora-note,
+.pastoral-choice-hint {
+  color: #a9cbe0;
+}
+
+.leader-initial,
+.address-meta span,
+.address-meta strong,
+.archive-actions button,
+.cloud-actions a,
+.cloud-actions button,
+.fasting-actions a,
+.fasting-actions button,
+.file-actions button {
+  background: #eaf5fc;
+  color: #1769aa;
+}
+
+.admin-section,
+.word-filters,
+.file-drop,
+.fasting-empty,
+.cloud-empty {
+  background: #f1f7fc;
+}
+
+.schedule-card,
+.cell-card,
+.address-picker,
+.address-result,
+.month-tabs,
+.annual-event,
+.word-file-card,
+.archive-week,
+.cloud-word,
+.fasting-file,
+.group-cards article,
+.admin-card,
+.word-filters,
+.file-drop {
+  border-color: #d8e7f2;
+}
+
+.annual-event {
+  border-left-color: #5aa9d6;
+}
+
+.modal,
+.auth-modal {
+  background: rgba(3, 18, 33, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    transition: none !important;
+  }
+}
