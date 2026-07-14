@@ -1,4 +1,5 @@
 (() => {
+  if(window.VIDEIRA_BIBLE_MODE==='local')return;
   const section=document.getElementById('biblia');
   if(!section)return;
 

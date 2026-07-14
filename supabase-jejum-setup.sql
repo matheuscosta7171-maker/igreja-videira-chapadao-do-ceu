@@ -9,6 +9,9 @@ create table if not exists public.jejum_materiais (
   created_at timestamptz not null default now(),
   constraint dia_campanha_valido check (dia_campanha is null or dia_campanha between 1 and 21)
 );
+alter table public.jejum_materiais add column if not exists categoria text not null default 'outro';
+alter table public.jejum_materiais drop constraint if exists jejum_materiais_categoria_check;
+alter table public.jejum_materiais add constraint jejum_materiais_categoria_check check (categoria in ('livro','confissao','outro'));
 alter table public.jejum_materiais enable row level security;
 grant select on public.jejum_materiais to anon, authenticated;
 grant insert, update, delete on public.jejum_materiais to authenticated;
