@@ -4,7 +4,7 @@
 
 No SQL Editor do projeto, execute uma vez:
 
-`supabase/migrations/2026_07_20_sistema_gestao_igreja.sql`
+`supabase/migrations/20260720120000_sistema_gestao_igreja.sql`
 
 A migração é idempotente, preserva tabelas e arquivos anteriores e cria perfis, papéis, células, relatórios, cuidado pastoral, conteúdo, notificações e auditoria. Depois, faça o primeiro login e atribua o `superadmin` com o comando explicado em `README-ADMIN.md`.
 
