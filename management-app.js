@@ -130,7 +130,7 @@
     );
   }
   async function loadPublicContent() {
-    const [testimonies, giving, construction, address, homeSections, schedule] = await Promise.all([
+    const [testimonies, giving, construction, address, homeSections, schedule, groups, weeklySettings] = await Promise.all([
       db
         .from("testimonies")
         .select("title,testimony_text,show_name,name,published_at")
@@ -157,6 +157,8 @@
         .maybeSingle(),
       db.from("homepage_sections").select("*").eq("published", true).eq("archived", false).order("display_order"),
       db.from("church_schedule").select("*").eq("published", true).eq("archived", false).gte("starts_at", new Date().toISOString()).order("starts_at").limit(12),
+      db.from("church_groups").select("name,description,group_url,button_label").eq("published", true).eq("active", true).eq("archived", false).order("display_order"),
+      db.from("site_settings").select("value").eq("key", "weekly_meetings").eq("published", true).maybeSingle(),
     ]);
     const testimonyBox = document.getElementById("publishedTestimonies");
     testimonyBox.replaceChildren();
@@ -266,6 +268,57 @@
     if (!managedEvents) { managedEvents = document.createElement("div"); managedEvents.id = "managedEvents"; managedEvents.className = "managed-events"; document.getElementById("agenda")?.append(managedEvents); }
     managedEvents.replaceChildren();
     (schedule.data || []).forEach((item) => managedEvents.append(listCard(item.title, [new Date(item.starts_at).toLocaleString("pt-BR"), item.description || "", item.location_text || ""].filter(Boolean))));
+    const groupCards = document.querySelector(".group-cards");
+    if (groupCards && groups.data?.length) {
+      groupCards.replaceChildren();
+      groups.data.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "group-card";
+        const content = document.createElement("div");
+        content.className = "group-card-content";
+        const title = document.createElement("h3");
+        title.textContent = item.name;
+        const description = document.createElement("p");
+        description.textContent = item.description || "";
+        content.append(title, description);
+        card.append(content);
+        if (item.group_url) {
+          const link = document.createElement("a");
+          link.className = "group-access link";
+          link.href = item.group_url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = item.button_label || "Acessar";
+          card.append(link);
+        }
+        groupCards.append(card);
+      });
+    }
+    const meetingRows = weeklySettings.data?.value;
+    const weeklyBox = document.getElementById("weeklyMeetings");
+    if (weeklyBox && Array.isArray(meetingRows) && meetingRows.length) {
+      weeklyBox.replaceChildren();
+      meetingRows.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "meeting-card home-reveal is-visible";
+        const icon = document.createElement("span");
+        icon.className = "meeting-icon";
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = item.icon || "•";
+        const day = document.createElement("span");
+        day.className = "meeting-day";
+        day.textContent = item.day || "";
+        const title = document.createElement("h3");
+        title.textContent = item.title || "";
+        const time = document.createElement("strong");
+        time.className = "meeting-time";
+        time.textContent = item.time || "";
+        const description = document.createElement("p");
+        description.textContent = item.description || "";
+        card.append(icon, day, title, time, description);
+        weeklyBox.append(card);
+      });
+    }
   }
   loadPublicContent();
 
@@ -283,7 +336,7 @@
       <section class="admin-panel" data-admin-panel="reports"><h3>Relatório da Célula</h3><form id="cellReportForm" class="management-form"><label>Célula<select name="cell_id" id="reportCell" required></select></label><label>Data da reunião<input type="date" name="meeting_date" required></label><label>Membros<input type="number" name="members_count" min="0" value="0" required></label><label>Frequentadores assíduos<input type="number" name="regular_attendees_count" min="0" value="0" required></label><label>Visitantes<input type="number" name="visitors_count" min="0" value="0" required></label><label>Total de presentes<output id="attendanceTotal">0</output></label><label>Oferta por PIX<input type="number" name="offering_pix" min="0" step="0.01" value="0" required></label><label>Oferta em dinheiro<input type="number" name="offering_cash" min="0" step="0.01" value="0" required></label><label>Total de ofertas<output id="offeringTotal">R$ 0,00</output></label><label>Apelos de salvação<input type="number" name="salvation_appeals_count" min="0" value="0" required></label><label class="full">Observações<textarea name="observations" maxlength="2000"></textarea></label><div class="full form-actions"><button class="mg-button" type="submit" value="draft">Salvar rascunho</button><button class="mg-button primary" type="submit" value="submitted">Enviar relatório</button></div><p class="full" data-form-status role="status"></p></form><div class="chart-toolbar"><label>Mês<input id="reportMonth" type="month"></label><button id="refreshReports" class="mg-button" type="button">Atualizar gráfico</button></div><div id="reportChart" class="report-chart"></div><div id="reportsList" class="management-list"></div></section>
       <section class="admin-panel" data-admin-panel="pastoral"><h3>Cuidado pastoral</h3><div class="moderation-columns"><div><h4>Pedidos de oração</h4><div id="adminPrayers" class="management-list"></div></div><div><h4>Visitas pastorais</h4><div id="adminVisits" class="management-list"></div></div><div><h4>Testemunhos</h4><div id="adminTestimonies" class="management-list"></div></div></div></section>
       <section class="admin-panel" data-admin-panel="content"><h3>Conteúdo público</h3><div class="admin-form-grid"><form id="givingForm" class="management-form card-form"><h4>Dízimos e Ofertas</h4><label>Título<input name="title" value="Dízimos e Ofertas" required></label><label class="full">Explicação<textarea name="explanation"></textarea></label><label>Chave PIX<input name="pix_key"></label><label>Favorecido<input name="beneficiary"></label><label>Banco<input name="bank_name"></label><label class="full">Instruções<textarea name="instructions"></textarea></label><label class="check full"><input type="checkbox" name="published"> Publicar</label><button class="mg-button primary" type="submit">Salvar</button><p data-form-status></p></form><form id="addressForm" class="management-form card-form"><h4>Onde Estamos</h4><label>Nome<input name="church_name" value="Igreja Videira" required></label><label>Rua<input name="street"></label><label>Número<input name="street_number"></label><label>Bairro<input name="district"></label><label>Cidade<input name="city"></label><label>Estado<input name="state"></label><label>CEP<input name="postal_code"></label><label>Complemento<input name="complement"></label><label class="full">Link oficial Google Maps<input type="url" name="google_maps_url"></label><label class="check full"><input type="checkbox" name="published"> Publicar</label><button class="mg-button primary" type="submit">Salvar</button><p data-form-status></p></form><form id="constructionForm" class="management-form card-form"><h4>Construção do Nosso Prédio</h4><label>Título<input name="title" value="Construção do Nosso Prédio" required></label><label class="full">Apresentação<textarea name="introduction"></textarea></label><label class="full">Descrição<textarea name="description"></textarea></label><label class="full">Objetivo<textarea name="objective"></textarea></label><label class="full">Andamento real<textarea name="progress_text"></textarea></label><label>Atualização<input type="date" name="latest_update"></label><label class="check"><input type="checkbox" name="published"> Publicar</label><button class="mg-button primary" type="submit">Salvar</button><p data-form-status></p></form><form id="eventAdminForm" class="management-form card-form"><h4>Agenda e eventos</h4><label>Título<input name="title" required></label><label>Início<input type="datetime-local" name="starts_at" required></label><label>Fim<input type="datetime-local" name="ends_at"></label><label>Local<input name="location_text"></label><label class="full">Descrição<textarea name="description"></textarea></label><label class="check"><input type="checkbox" name="published"> Publicar</label><button class="mg-button primary" type="submit">Adicionar evento</button><p data-form-status></p></form></div></section>
-      <section class="admin-panel" data-admin-panel="people"><h3>Usuários, líderes e células</h3><div class="admin-form-grid"><form id="cellAdminForm" class="management-form card-form"><h4>Cadastrar célula</h4><label>Nome<input name="name" required></label><label>Discipulador<input name="discipulator_name"></label><label>Dia<input name="meeting_day"></label><label>Horário<input type="time" name="meeting_time"></label><label>Endereço público<input name="public_address"></label><label class="check"><input type="checkbox" name="published"> Publicar</label><button class="mg-button primary" type="submit">Salvar célula</button><p data-form-status></p></form><form id="leaderAdminForm" class="management-form card-form"><h4>Líder público</h4><label>Nome<input name="name" required></label><label>Identificador<input name="slug" pattern="[a-z0-9-]+" required></label><label>Discipulado<input name="discipleship" required></label><label>WhatsApp (55 + DDD + número)<input name="whatsapp" pattern="55[0-9]{10,11}"></label><label>Dia<input name="meeting_day"></label><label>Horário<input name="meeting_time"></label><label class="check"><input type="checkbox" name="published" checked> Publicar</label><button class="mg-button primary" type="submit">Salvar líder</button><p data-form-status></p></form><form id="roleForm" class="management-form card-form superadmin-only"><h4>Permissões</h4><label>Usuário<select name="user_id" id="roleUser"></select></label><label>Perfil<select name="role"><option value="member">Membro</option><option value="leader">Líder</option><option value="pastor">Pastor</option><option value="admin">Administrador</option><option value="superadmin">Superadmin</option></select></label><button class="mg-button primary" type="submit">Atribuir perfil</button><p data-form-status></p></form></div><div id="peopleList" class="management-list"></div></section>
+      <section class="admin-panel" data-admin-panel="people"><h3>Usuários, líderes e células</h3><div class="admin-form-grid"><form id="cellAdminForm" class="management-form card-form"><h4>Cadastrar célula</h4><label>Nome<input name="name" required></label><label>Discipulador<input name="discipulator_name"></label><label>Dia<input name="meeting_day"></label><label>Horário<input type="time" name="meeting_time"></label><label>Endereço público<input name="public_address"></label><label class="check"><input type="checkbox" name="published"> Publicar</label><button class="mg-button primary" type="submit">Salvar célula</button><p data-form-status></p></form><form id="leaderAdminForm" class="management-form card-form"><h4>Líder público</h4><label>Nome<input name="name" required></label><label>Identificador<input name="slug" pattern="[a-z0-9-]+" required></label><label>Discipulado<input name="discipleship" required></label><label>WhatsApp (55 + DDD + número)<input name="whatsapp" pattern="55[0-9]{10,11}"></label><label>Dia<input name="meeting_day"></label><label>Horário<input name="meeting_time"></label><label class="check"><input type="checkbox" name="published" checked> Publicar</label><button class="mg-button primary" type="submit">Salvar líder</button><p data-form-status></p></form><form id="roleForm" class="management-form card-form"><h4>Permissões</h4><label>Usuário<select name="user_id" id="roleUser"></select></label><label>Perfil<select name="role"><option value="member">Membro</option><option value="leader">Líder</option><option value="pastor">Pastor</option><option value="admin">Administrador</option><option value="superadmin">Superadmin</option></select></label><button class="mg-button primary" type="submit">Atribuir perfil</button><p data-form-status></p></form></div><div id="peopleList" class="management-list"></div></section>
       <section class="admin-panel" data-admin-panel="audit"><h3>Histórico administrativo</h3><div id="auditList" class="management-list"></div></section>
     </div>`;
   admin.prepend(dashboard);
@@ -329,9 +382,13 @@
     if (!window.churchAuth?.canManageContent())
       return message(status, "Acesso de administrador necessário.", "error");
     const payload = { ...formPayload(form), ...(options.extra || {}) };
-    const query = options.singleton
-      ? db.from(table).upsert(payload, { onConflict: options.conflict || "id" })
-      : db.from(table).insert(payload);
+    let query;
+    if (options.singleton) query = db.from(table).upsert(payload, { onConflict: options.conflict || "id" });
+    else if (payload.id) {
+      const id = payload.id;
+      delete payload.id;
+      query = db.from(table).update(payload).eq("id", id);
+    } else query = db.from(table).insert(payload);
     const { error } = await query;
     if (error)
       return message(
@@ -421,10 +478,11 @@
       const form = event.currentTarget,
         status = form.querySelector("[data-form-status]");
       const payload = formPayload(form);
-      payload.assigned_by = window.churchAuth?.session?.user?.id;
-      const { error } = await db
-        .from("user_roles")
-        .upsert(payload, { onConflict: "user_id,role" });
+      const { error } = await db.rpc("manage_user_role", {
+        target_user: payload.user_id,
+        target_role: payload.role,
+        remove_role: false,
+      });
       message(
         status,
         error ? "Não foi possível atribuir o perfil." : "Perfil atribuído.",
@@ -477,7 +535,7 @@
     );
     reportForm.reset();
     reportForm.dispatchEvent(new Event("input"));
-    loadReports();
+    if (!window.reportManagementV2) loadReports();
   });
   document
     .getElementById("refreshReports")
@@ -598,8 +656,9 @@
         ];
     const [prayers, visits, testimonies] = await Promise.all(queries);
     const cards = document.getElementById("dashboardCards");
-    cards.replaceChildren();
-    [
+    if (!window.reportManagementV2) {
+      cards.replaceChildren();
+      [
       [
         "Pedidos pendentes",
         (prayers.data || []).filter((x) => x.status === "received").length,
@@ -613,9 +672,10 @@
         (testimonies.data || []).filter((x) => x.status === "pending").length,
       ],
       ["Seus perfis", auth.roles.length],
-    ].forEach(([label, value]) =>
-      cards.append(listCard(label, [String(value)])),
-    );
+      ].forEach(([label, value]) =>
+        cards.append(listCard(label, [String(value)])),
+      );
+    }
     const prayersBox = document.getElementById("adminPrayers");
     prayersBox.replaceChildren();
     (prayers.data || []).forEach((item) =>
@@ -718,35 +778,37 @@
         ),
       ),
     );
-    const { data: links } = await db
-      .from("leader_cells")
-      .select("cell_id,cells(id,name)")
-      .eq("leader_id", auth.session.user.id);
-    const select = document.getElementById("reportCell");
-    select.replaceChildren();
-    (links || []).forEach((link) => {
-      const option = document.createElement("option");
-      option.value = link.cells.id;
-      option.textContent = link.cells.name;
-      select.append(option);
-    });
-    if (staff && !select.children.length) {
-      const { data: allCells } = await db
-        .from("cells")
-        .select("id,name")
-        .eq("active", true);
-      (allCells || []).forEach((cell) => {
+    if (!window.reportManagementV2) {
+      const { data: links } = await db
+        .from("leader_cells")
+        .select("cell_id,cells(id,name)")
+        .eq("leader_id", auth.session.user.id);
+      const select = document.getElementById("reportCell");
+      select.replaceChildren();
+      (links || []).forEach((link) => {
         const option = document.createElement("option");
-        option.value = cell.id;
-        option.textContent = cell.name;
+        option.value = link.cells.id;
+        option.textContent = link.cells.name;
         select.append(option);
       });
+      if (staff && !select.children.length) {
+        const { data: allCells } = await db
+          .from("cells")
+          .select("id,name")
+          .eq("active", true);
+        (allCells || []).forEach((cell) => {
+          const option = document.createElement("option");
+          option.value = cell.id;
+          option.textContent = cell.name;
+          select.append(option);
+        });
+      }
     }
     if (auth.hasRole("superadmin")) {
       const [{ data: profiles }, { data: audit }] = await Promise.all([
         db
           .from("profiles")
-          .select("id,full_name,email,is_active")
+          .select("id,full_name,email,active")
           .order("full_name"),
         db
           .from("audit_logs")
@@ -784,7 +846,7 @@
     (notes || []).forEach((note) =>
       noteBox.append(listCard(note.title, [note.message])),
     );
-    loadReports();
+    if (!window.reportManagementV2) loadReports();
   }
   window.addEventListener("church-auth-changed", () => loadDashboard());
   window.addEventListener("load", () => loadPublicContent(), { once: true });

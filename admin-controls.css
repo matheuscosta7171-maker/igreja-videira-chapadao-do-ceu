@@ -1,0 +1,43 @@
+.enhanced-admin-grid {
+  margin-bottom: 1rem;
+}
+.admin-catalog {
+  margin: 0 0 1.25rem;
+}
+.availability-form {
+  margin-top: 1.25rem;
+}
+.admin-catalog article {
+  border-left: 4px solid var(--mg-blue);
+}
+.card-form input[type="file"] {
+  padding: 0.55rem;
+}
+.management-form [hidden] {
+  display: none !important;
+}
+.management-form fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.9rem;
+  border: 1px solid var(--mg-border);
+  border-radius: 12px;
+}
+.management-form fieldset legend {
+  padding: 0 0.4rem;
+  color: var(--mg-navy);
+  font-weight: 800;
+}
+@media (max-width: 800px) {
+  .enhanced-admin-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-catalog .list-actions .mg-button {
+    flex: 1;
+  }
+  .management-form fieldset {
+    grid-template-columns: 1fr;
+  }
+}

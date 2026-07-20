@@ -1,4 +1,4 @@
-const CACHE_NAME='videira-shell-v3';
+const CACHE_NAME='videira-shell-v4';
 const APP_SHELL=[
   './','./index.html','./styles.css','./logo-videira.png','./manifest.webmanifest',
   './pwa-install.css','./pwa-install.js','./assets/icons/app-icon-192.png','./assets/icons/app-icon-512.png'
