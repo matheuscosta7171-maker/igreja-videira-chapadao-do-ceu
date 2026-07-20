@@ -6,7 +6,7 @@ const root=path.resolve(import.meta.dirname,'..');
 const read=name=>readFile(path.join(root,name),'utf8');
 const [html,app,css,migration,worker,env]=await Promise.all([
   read('index.html'),read('management-app.js'),read('management-app.css'),
-  read('supabase/migrations/2026_07_20_sistema_gestao_igreja.sql'),read('service-worker.js'),read('.env.example')
+  read('supabase/migrations/20260720120000_sistema_gestao_igreja.sql'),read('service-worker.js'),read('.env.example')
 ]);
 
 for(const required of ['Pedidos de Oração','Agendar Visita Pastoral','Dízimos e Ofertas','Construção do Nosso Prédio','Onde Estamos','Relatório da Célula'])assert.ok(app.includes(required),`Área ausente: ${required}`);
