@@ -1,4 +1,4 @@
-const CACHE_NAME='videira-shell-v1';
+const CACHE_NAME='videira-shell-v3';
 const APP_SHELL=[
   './','./index.html','./styles.css','./logo-videira.png','./manifest.webmanifest',
   './pwa-install.css','./pwa-install.js','./assets/icons/app-icon-192.png','./assets/icons/app-icon-512.png'
@@ -19,10 +19,11 @@ self.addEventListener('activate',event=>{
 
 self.addEventListener('fetch',event=>{
   if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;
+  if(event.request.headers.has('authorization')||event.request.url.includes('/functions/')||event.request.url.includes('/rest/'))return;
   event.respondWith(
     fetch(event.request)
       .then(response=>{
-        if(response.ok){
+        if(response.ok&&response.type==='basic'&&!response.headers.get('cache-control')?.includes('no-store')){
           const copy=response.clone();
           caches.open(CACHE_NAME).then(cache=>cache.put(event.request,copy));
         }

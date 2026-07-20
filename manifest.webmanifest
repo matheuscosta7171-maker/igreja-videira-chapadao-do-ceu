@@ -1,13 +1,13 @@
 {
   "name": "Igreja Videira — Chapadão do Céu",
   "short_name": "Igreja Videira",
-  "description": "Programação, células, Palavra e informações da Igreja Videira de Chapadão do Céu.",
+  "description": "Programação, células, Suprimento da Célula e informações da Igreja Videira de Chapadão do Céu.",
   "lang": "pt-BR",
   "start_url": "./#inicio",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#173f2b",
+  "theme_color": "#0b2d4f",
   "icons": [
     {
       "src": "assets/icons/app-icon-192.png",

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#173f2b" />
+  <meta name="theme-color" content="#0b2d4f" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Igreja Videira" />
@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="pastoral.css" />
   <link rel="stylesheet" href="pastora-hierarquia.css" />
   <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="management-app.css?v=20260720-2" />
 </head>
 <body>
   <header class="topbar">
@@ -89,10 +90,10 @@
     </section>
 
     <section class="section address-section" id="enderecos">
-      <div class="section-heading"><div><span class="eyebrow">Onde nos encontramos</span><h2>Endereços das células</h2><p class="section-intro">Escolha um líder para consultar o dia, horário e local da célula.</p></div><span class="test-badge">DADOS DE TESTE</span></div>
+      <div class="section-heading"><div><span class="eyebrow">Onde nos encontramos</span><h2>Endereços das células</h2><p class="section-intro">Escolha um líder para consultar o dia e horário. Os locais serão publicados após confirmação.</p></div><span class="test-badge">PREENCHIMENTO PENDENTE</span></div>
       <div class="address-layout">
-        <div class="address-picker"><label for="leaderAddressSelect">Selecione o líder</label><select id="leaderAddressSelect"><optgroup label="Discipulado Matheus"><option value="matheus-costa">Matheus Costa</option><option value="matheus-victor">Matheus Victor</option><option value="daniel">Daniel</option><option value="isadora">Isadora</option></optgroup><optgroup label="Discipulado Klebson"><option value="klebson">Klebson</option><option value="rhayngrid">Rhayngrid</option><option value="wiliane">Wiliane</option></optgroup><optgroup label="Discipulado Antônio"><option value="antonio">Antônio</option><option value="humberto">Humberto</option><option value="jose-nivolan">José Nivolan</option><option value="elimar">Elimar</option></optgroup><optgroup label="Discipulado Edson"><option value="edson">Edson</option><option value="messias">Messias</option><option value="enio">Enio</option><option value="celio">Celio</option></optgroup></select><p>Os endereços exibidos nesta etapa são apenas exemplos e não representam locais reais.</p></div>
-        <article class="address-result"><span class="address-pin">⌖</span><div><span class="tag" id="addressGroup">DISCIPULADO MATHEUS</span><h3 id="addressLeader">Célula Matheus Costa</h3><p class="address-line" id="addressLine">Rua Exemplo, 100 — Bairro Teste</p><div class="address-meta"><span id="addressDay">Sábado</span><strong id="addressTime">19h30</strong></div><small>Endereço provisório para teste</small></div></article>
+        <div class="address-picker"><label for="leaderAddressSelect">Selecione o líder</label><select id="leaderAddressSelect"><optgroup label="Discipulado Matheus"><option value="matheus-costa">Matheus Costa</option><option value="matheus-victor">Matheus Victor</option><option value="daniel">Daniel</option><option value="isadora">Isadora</option></optgroup><optgroup label="Discipulado Klebson"><option value="klebson">Klebson</option><option value="rhayngrid">Rhayngrid</option><option value="wiliane">Wiliane</option></optgroup><optgroup label="Discipulado Antônio"><option value="antonio">Antônio</option><option value="humberto">Humberto</option><option value="jose-nivolan">José Nivolan</option><option value="elimar">Elimar</option></optgroup><optgroup label="Discipulado Edson"><option value="edson">Edson</option><option value="messias">Messias</option><option value="enio">Enio</option><option value="celio">Celio</option></optgroup></select><p>Consulte a liderança enquanto o endereço oficial da célula não estiver publicado.</p></div>
+        <article class="address-result"><span class="address-pin">⌖</span><div><span class="tag" id="addressGroup">DISCIPULADO MATHEUS</span><h3 id="addressLeader">Célula Matheus Costa</h3><p class="address-line" id="addressLine">Endereço ainda não informado</p><div class="address-meta"><span id="addressDay">Sábado</span><strong id="addressTime">19h30</strong></div><small>Local aguardando confirmação</small></div></article>
       </div>
     </section>
 
@@ -154,7 +155,7 @@
   <div class="modal" id="modal" aria-hidden="true"><div class="modal-box"><button class="modal-close" aria-label="Fechar">×</button><div id="modalContent"></div></div></div>
   <link rel="stylesheet" href="visao.css" />
   <link rel="stylesheet" href="logo-oficial.css" />
-  <script src="app.js"></script>
+  <script src="app.js?v=20260720-2"></script>
   <script src="pastora-dados.js"></script>
   <link rel="stylesheet" href="agenda2026.css" />
   <script src="agenda2026.js"></script>
@@ -164,9 +165,10 @@
   <script src="palavra-arquivos.js"></script>
   <link rel="stylesheet" href="arquivo-palavras.css" />
   <script src="arquivo-palavras.js"></script>
-  <link rel="stylesheet" href="supabase-app.css" />
+  <link rel="stylesheet" href="supabase-app.css?v=20260720-2" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-app.js"></script>
+  <script src="supabase-app.js?v=20260720-2"></script>
+  <script src="management-app.js?v=20260720-2"></script>
   <link rel="stylesheet" href="melhorias-palavra-whatsapp.css" />
   <link rel="stylesheet" href="pwa-install.css" />
   <script src="whatsapp-lideres.js"></script>
@@ -176,7 +178,7 @@
   <link rel="stylesheet" href="bible.css" />
   <link rel="stylesheet" href="bible-integration.css" />
   <link rel="stylesheet" href="theme-blue.css" />
-  <script src="jejum-grupos.js"></script>
+  <script src="jejum-grupos.js?v=20260720-2"></script>
   <script src="bible.js"></script>
   <script src="bible-local.js"></script>
   <script src="bible-integration.js"></script>

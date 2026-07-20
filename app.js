@@ -12,21 +12,21 @@ document.getElementById('wordForm').addEventListener('submit',event=>{event.prev
 document.getElementById('eventForm').addEventListener('submit',event=>{event.preventDefault();churchContent.eventTitle=document.getElementById('adminEventTitle').value.trim()||defaults.eventTitle;churchContent.eventDetails=document.getElementById('adminEventDetails').value.trim()||defaults.eventDetails;saveContent()});
 document.getElementById('resetContent').addEventListener('click',()=>{if(confirm('Restaurar os dados iniciais de teste?')){churchContent={...defaults};saveContent()}});renderContent();
 const addressData={
- 'matheus-costa':['Matheus Costa','Discipulado Matheus','Sábado','Rua Exemplo, 100 — Bairro Teste'],
- 'matheus-victor':['Matheus Victor','Discipulado Matheus','Quarta-feira','Avenida Modelo, 210 — Bairro Teste'],
- 'daniel':['Daniel','Discipulado Matheus','Quarta-feira','Rua das Células, 30 — Bairro Teste'],
- 'isadora':['Isadora','Discipulado Matheus','Sábado','Alameda Videira, 45 — Bairro Teste'],
- 'klebson':['Klebson','Discipulado Klebson','Sábado','Rua Comunhão, 120 — Bairro Teste'],
- 'rhayngrid':['Rhayngrid','Discipulado Klebson','Sábado','Avenida Esperança, 88 — Bairro Teste'],
- 'wiliane':['Wiliane','Discipulado Klebson','Sábado','Rua da Família, 75 — Bairro Teste'],
- 'antonio':['Antônio','Discipulado Antônio','Quarta-feira','Rua Exemplo, 315 — Bairro Teste'],
- 'humberto':['Humberto','Discipulado Antônio','Quarta-feira','Avenida Modelo, 420 — Bairro Teste'],
- 'jose-nivolan':['José Nivolan','Discipulado Antônio','Quarta-feira','Rua das Oliveiras, 55 — Bairro Teste'],
- 'elimar':['Elimar','Discipulado Antônio','Quarta-feira','Alameda da Paz, 61 — Bairro Teste'],
- 'edson':['Edson','Discipulado Edson','Quarta-feira','Rua Comunidade, 140 — Bairro Teste'],
- 'messias':['Messias','Discipulado Edson','Quarta-feira','Avenida Central, 225 — Bairro Teste'],
- 'enio':['Enio','Discipulado Edson','Quarta-feira','Rua do Encontro, 90 — Bairro Teste'],
- 'celio':['Celio','Discipulado Edson','Quarta-feira','Alameda Esperança, 18 — Bairro Teste']
+ 'matheus-costa':['Matheus Costa','Discipulado Matheus','Sábado','Endereço ainda não informado'],
+ 'matheus-victor':['Matheus Victor','Discipulado Matheus','Quarta-feira','Endereço ainda não informado'],
+ 'daniel':['Daniel','Discipulado Matheus','Quarta-feira','Endereço ainda não informado'],
+ 'isadora':['Isadora','Discipulado Matheus','Sábado','Endereço ainda não informado'],
+ 'klebson':['Klebson','Discipulado Klebson','Sábado','Endereço ainda não informado'],
+ 'rhayngrid':['Rhayngrid','Discipulado Klebson','Sábado','Endereço ainda não informado'],
+ 'wiliane':['Wiliane','Discipulado Klebson','Sábado','Endereço ainda não informado'],
+ 'antonio':['Antônio','Discipulado Antônio','Quarta-feira','Endereço ainda não informado'],
+ 'humberto':['Humberto','Discipulado Antônio','Quarta-feira','Endereço ainda não informado'],
+ 'jose-nivolan':['José Nivolan','Discipulado Antônio','Quarta-feira','Endereço ainda não informado'],
+ 'elimar':['Elimar','Discipulado Antônio','Quarta-feira','Endereço ainda não informado'],
+ 'edson':['Edson','Discipulado Edson','Quarta-feira','Endereço ainda não informado'],
+ 'messias':['Messias','Discipulado Edson','Quarta-feira','Endereço ainda não informado'],
+ 'enio':['Enio','Discipulado Edson','Quarta-feira','Endereço ainda não informado'],
+ 'celio':['Celio','Discipulado Edson','Quarta-feira','Endereço ainda não informado']
 };
 const addressSelect=document.getElementById('leaderAddressSelect');function renderAddress(){const data=addressData[addressSelect.value];document.getElementById('addressLeader').textContent=`Célula ${data[0]}`;document.getElementById('addressGroup').textContent=data[1].toUpperCase();document.getElementById('addressDay').textContent=data[2];document.getElementById('addressTime').textContent='19h30';document.getElementById('addressLine').textContent=data[3]}addressSelect.addEventListener('change',renderAddress);renderAddress();
 document.querySelectorAll('.leadership-filter').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.leadership-filter').forEach(item=>item.classList.remove('active'));button.classList.add('active');document.querySelectorAll('[data-leadership-group]').forEach(person=>person.classList.toggle('hidden',person.dataset.leadershipGroup!==button.dataset.leadership))}));
