@@ -58,6 +58,7 @@
     .join(
       "",
     )}</select></label><label class="staff-report-field">Líder<select id="filterLeader"><option value="all">Todos</option></select></label><label>Célula<select id="filterCell"><option value="all">Todas</option></select></label><label class="report-search staff-report-field">Buscar<input id="filterSearch" type="search" placeholder="Líder ou célula"></label><button id="refreshReportsV2" class="mg-button" type="button">Atualizar</button><button id="exportReports" class="mg-button staff-report-field" type="button">Exportar CSV</button></div>
+  <aside class="cell-offering-card"><div><span class="showcase-kicker">Oferta da célula</span><h4>Dados oficiais para o envio da oferta</h4><p>Use este QR Code para encaminhar a oferta da reunião. Confira o favorecido antes de concluir a operação e registre no relatório apenas o valor efetivamente enviado.</p></div><a href="assets/images/gestao/pix-ofertas-celula.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/images/gestao/pix-ofertas-celula.jpeg" alt="QR Code oficial para ofertas das células da Igreja Videira"><span>Ampliar QR Code</span></a></aside>
   <div id="reportSummary" class="report-summary"></div><div id="reportChartV2" class="report-chart-v2"></div><div id="reportsTable" class="reports-table" aria-live="polite"></div>`;
   const form = document.getElementById("cellReportFormV2");
 

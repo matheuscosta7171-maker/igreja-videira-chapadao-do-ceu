@@ -2,11 +2,13 @@
 
 ## 1. Banco e RLS
 
-No painel do projeto, abra **SQL Editor > New query**, copie todo o conteúdo de `EXECUTAR-NO-SUPABASE.sql` e clique em **Run**. O arquivo corresponde à migração:
+No painel do projeto, abra **SQL Editor > New query**, copie **somente** o conteúdo de `EXECUTAR-GESTAO-NO-SUPABASE.sql` e clique em **Run**.
 
-`supabase/migrations/20260720120000_sistema_gestao_igreja.sql`
+Esse arquivo é autônomo e idempotente. Ele cria ou complementa perfis, papéis, células, vínculos de líderes, relatórios semanais, cuidado pastoral, conteúdo administrativo, dízimos e ofertas, construção, endereço, notificações e auditoria. Ele preserva tabelas e dados existentes, não cria usuários fictícios e não promove ninguém automaticamente a superadministrador.
 
-A migração é idempotente, preserva tabelas e arquivos anteriores e cria perfis, papéis, células, relatórios, cuidado pastoral, conteúdo, notificações e auditoria. Depois, execute `CRIAR-PRIMEIRO-SUPERADMIN.sql` com o UUID copiado em **Authentication > Users**.
+O arquivo de gestão não depende de arquivos SQL anteriores nem de módulos independentes. Para esta etapa, **não execute `EXECUTAR-NO-SUPABASE.sql`**, pois ele reúne configurações antigas que não pertencem ao escopo atual.
+
+Depois que o SQL de gestão terminar com sucesso, use `CRIAR-PRIMEIRO-SUPERADMIN.sql` somente quando você decidir atribuir o primeiro acesso administrativo a um usuário real já cadastrado em **Authentication > Users**.
 
 ## 2. Edge Functions
 
@@ -27,7 +29,7 @@ Em Authentication → URL Configuration, mantenha a URL do GitHub Pages como Sit
 
 ## 4. Storage
 
-O bucket `church-public` aceita apenas JPEG, PNG, WebP e PDF, até 15 MB. Os buckets existentes `palavras` e `jejum` são preservados. Upload exige admin ou superadmin.
+O bucket `church-public` aceita apenas JPEG, PNG, WebP e PDF, até 15 MB. Outros buckets existentes permanecem inalterados. Upload exige admin ou superadmin.
 
 ## 5. Teste de RLS
 
