@@ -2,11 +2,11 @@
 
 ## 1. Banco e RLS
 
-No SQL Editor do projeto, execute uma vez:
+No painel do projeto, abra **SQL Editor > New query**, copie todo o conteúdo de `EXECUTAR-NO-SUPABASE.sql` e clique em **Run**. O arquivo corresponde à migração:
 
 `supabase/migrations/20260720120000_sistema_gestao_igreja.sql`
 
-A migração é idempotente, preserva tabelas e arquivos anteriores e cria perfis, papéis, células, relatórios, cuidado pastoral, conteúdo, notificações e auditoria. Depois, faça o primeiro login e atribua o `superadmin` com o comando explicado em `README-ADMIN.md`.
+A migração é idempotente, preserva tabelas e arquivos anteriores e cria perfis, papéis, células, relatórios, cuidado pastoral, conteúdo, notificações e auditoria. Depois, execute `CRIAR-PRIMEIRO-SUPERADMIN.sql` com o UUID copiado em **Authentication > Users**.
 
 ## 2. Edge Functions
 
@@ -18,6 +18,8 @@ supabase functions deploy send-notification
 ```
 
 `public-submissions` valida, limita e grava formulários públicos usando a chave pública fornecida automaticamente pelo Supabase. `send-notification` exige sessão e perfil autorizado.
+
+O CLI não estava autenticado durante esta entrega; por isso estes comandos e o SQL acima são os únicos passos manuais restantes no Supabase.
 
 ## 3. Auth
 

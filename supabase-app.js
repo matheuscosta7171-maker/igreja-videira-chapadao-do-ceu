@@ -55,22 +55,38 @@ document
   });
 async function setAdminSession(session) {
   currentSession = session;
+  if (!session) {
+    document.body.classList.remove("management-unconfigured");
+    document.getElementById("managementSetupNotice")?.remove();
+  }
   let profile = null,
     roles = [];
   if (session) {
     const [profileResult, rolesResult] = await Promise.all([
       sb
         .from("profiles")
-        .select("id,full_name,email,is_active")
+        .select("id,full_name,email,active")
         .eq("id", session.user.id)
         .maybeSingle(),
       sb.from("user_roles").select("role").eq("user_id", session.user.id),
     ]);
+    const configurationMissing = [profileResult.error, rolesResult.error].some(
+      (error) => error?.code === "PGRST205",
+    );
+    document.body.classList.toggle("management-unconfigured", configurationMissing);
+    let setupNotice = document.getElementById("managementSetupNotice");
+    if (configurationMissing && !setupNotice) {
+      setupNotice = document.createElement("aside");
+      setupNotice.id = "managementSetupNotice";
+      setupNotice.className = "management-setup-notice";
+      setupNotice.innerHTML = '<strong>O sistema administrativo ainda precisa ser ativado no Supabase.</strong><span>Execute o arquivo <code>EXECUTAR-NO-SUPABASE.sql</code> no SQL Editor.</span>';
+      document.querySelector("main")?.prepend(setupNotice);
+    } else if (!configurationMissing) setupNotice?.remove();
     profile = profileResult.data || {
       id: session.user.id,
       full_name: session.user.email?.split("@")[0],
       email: session.user.email,
-      is_active: true,
+      active: true,
     };
     roles = (rolesResult.data || []).map((item) => item.role);
   }
@@ -90,6 +106,7 @@ async function setAdminSession(session) {
     hasRole: (...wanted) => wanted.some((role) => roles.includes(role)),
     canManageContent: () => canManage,
     privateAccess,
+    configured: !document.body.classList.contains("management-unconfigured"),
   };
   window.dispatchEvent(
     new CustomEvent("church-auth-changed", { detail: window.churchAuth }),

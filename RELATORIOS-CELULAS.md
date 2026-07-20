@@ -6,12 +6,14 @@
 - Oferta total = PIX + dinheiro.
 - Números não podem ser negativos e observações têm limite.
 - Uma célula possui no máximo um relatório por data.
-- Estados: `draft`, `submitted`, `reviewed`, `returned`.
+- Estados: `draft`, `submitted`, `reviewed`, `returned`, `archived`.
 - Líder edita somente rascunho ou devolvido da própria célula. Pastor/admin podem revisar e devolver.
 
 ## Gráficos
 
-O painel usa barras CSS leves, filtradas por mês, sem biblioteca externa. O banco decide quais linhas o usuário pode ler. Ofertas não são expostas na área pública nem entre líderes.
+O painel usa barras CSS leves, filtradas por mês, sem biblioteca externa. Exibe membros, assíduos, visitantes, presença, apelos, média semanal e comparação com o mês anterior. O banco decide quais linhas o usuário pode ler. Ofertas não são expostas na área pública nem entre líderes.
+
+Admin/pastor/superadmin podem filtrar por líder, célula e status, buscar nomes, revisar, devolver, arquivar e exportar CSV. Quando não há linhas, aparece “Nenhum relatório encontrado para o período selecionado.”
 
 ## Cadastro
 

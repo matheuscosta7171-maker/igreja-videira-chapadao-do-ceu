@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-07-20 — Correção final de relatórios e administração
+
+- causa do relatório ausente diagnosticada como migração não executada no Supabase remoto (`PGRST205`);
+- consulta de perfil corrigida de `is_active` para `active`;
+- novo fluxo de relatório com cinco estados, duplicidade protegida, histórico, filtros, busca, revisão, observação interna, CSV e gráficos reais;
+- painel ampliado para usuários, vínculos, líderes, células, agenda, grupos, suprimentos e disponibilidade pastoral;
+- dashboard conectado a métricas reais e estado de configuração pendente;
+- RLS reforçada, atribuição de papéis por RPC segura e auditoria com valores anteriores/novos;
+- adicionados `EXECUTAR-NO-SUPABASE.sql`, `CRIAR-PRIMEIRO-SUPERADMIN.sql` e diagnóstico operacional.
+
 ## 2026-07-20 — Sistema de gestão
 
 - autenticação ampliada para superadmin, admin, pastor, líder, membro e visitante;
