@@ -72,8 +72,8 @@
     <div class="service-panel active" data-panel="prayer"><div class="public-form-intro"><h3>Pedidos de Oração</h3><p>Queremos orar com você. Seu pedido não será publicado automaticamente.</p></div><form id="prayerRequestForm" class="management-form"><input class="hp" name="website" tabindex="-1" autocomplete="off"><label>Nome<input name="name" maxlength="120"></label><label>Telefone ou e-mail (opcional)<input name="contact" maxlength="160"></label><label class="full">Pedido de oração<textarea name="request_text" minlength="10" maxlength="3000" required></textarea></label><label class="check full"><input type="checkbox" name="is_anonymous"> Quero permanecer anônimo</label><label class="check full"><input type="checkbox" name="contact_consent"> Autorizo contato da liderança</label><button class="mg-button primary" type="submit">Enviar pedido</button><p data-form-status role="status"></p></form></div>
     <div class="service-panel" data-panel="visit"><div class="public-form-intro"><h3>Agendar Visita Pastoral</h3><p>Solicite um atendimento. A data será confirmada pela equipe pastoral.</p></div><form id="pastoralVisitForm" class="management-form"><input class="hp" name="website" tabindex="-1" autocomplete="off"><label>Nome<input name="name" maxlength="120" required></label><label>Telefone<input name="phone" maxlength="30" inputmode="tel" required></label><label>E-mail (opcional)<input type="email" name="email" maxlength="160"></label><label>Tipo<select name="appointment_type" required><option value="visita pastoral">Visita pastoral</option><option value="aconselhamento">Aconselhamento</option><option value="oração">Oração</option><option value="visita hospitalar">Visita hospitalar</option><option value="visita familiar">Visita familiar</option><option value="outro">Outro</option></select></label><label>Data desejada<input type="date" name="desired_date" required></label><label>Horário desejado<input type="time" name="desired_time" required></label><label class="full">Motivo resumido<textarea name="reason" minlength="5" maxlength="500" required></textarea></label><label class="full">Endereço, se presencial<input name="address" maxlength="500"></label><label class="full">Observações<textarea name="notes" maxlength="1500"></textarea></label><label class="check full"><input type="checkbox" name="contact_consent" required> Autorizo contato para confirmação deste atendimento</label><button class="mg-button primary" type="submit">Solicitar visita</button><p data-form-status role="status"></p></form></div>
     <div class="service-panel" data-panel="testimony"><div class="public-form-intro"><h3>Testemunhos</h3><p>Compartilhe o que Deus fez. A publicação depende de autorização e moderação.</p></div><div id="publishedTestimonies" class="testimony-grid"></div><form id="testimonyForm" class="management-form"><input class="hp" name="website" tabindex="-1" autocomplete="off"><label>Nome<input name="name" maxlength="120" required></label><label>Título<input name="title" maxlength="160" required></label><label>Data do acontecimento<input type="date" name="event_date"></label><label>Contato (opcional)<input name="contact" maxlength="160"></label><label class="full">Testemunho<textarea name="testimony_text" minlength="20" maxlength="5000" required></textarea></label><label class="check full"><input type="checkbox" name="publication_consent"> Autorizo a publicação após moderação</label><label class="check full"><input type="checkbox" name="show_name"> Autorizo mostrar meu nome</label><button class="mg-button primary" type="submit">Enviar testemunho</button><p data-form-status role="status"></p></form></div>
-    <div class="service-panel info-panel" data-panel="giving"><h3>Dízimos e Ofertas</h3><div id="givingPublic"><p>Cadastre os dados oficiais para contribuição.</p></div></div>
-    <div class="service-panel info-panel" data-panel="construction"><h3>Construção do Nosso Prédio</h3><div id="constructionPublic"><p>As informações oficiais do projeto serão publicadas aqui.</p></div></div>
+    <div class="service-panel info-panel" data-panel="giving"><div id="givingPublic" class="giving-showcase"><div class="giving-copy"><span class="showcase-kicker">Generosidade e propósito</span><h3 id="givingPublicTitle">Dízimos e Ofertas</h3><p id="givingPublicExplanation">Contribua com segurança por PIX e participe do que Deus está realizando por meio da Igreja Videira.</p><div class="giving-security"><span aria-hidden="true">✓</span><p>Confira os dados exibidos no aplicativo do seu banco antes de confirmar a contribuição.</p></div><div class="giving-details" data-giving-details></div></div><figure class="giving-qr"><img id="givingQrImage" src="assets/images/gestao/pix-dizimos-ofertas.jpeg" alt="QR Code oficial para dízimos e ofertas da Igreja Videira"><figcaption>Aponte a câmera do celular ou abra o aplicativo do seu banco.</figcaption></figure></div></div>
+    <div class="service-panel info-panel" data-panel="construction"><div id="constructionPublic" class="construction-showcase"><figure class="construction-hero"><img id="constructionHeroImage" src="assets/images/gestao/projeto-fachada.jpeg" alt="Projeto arquitetônico da fachada da Igreja Videira"><figcaption><span class="showcase-kicker">Um espaço para servir pessoas</span><h3 id="constructionPublicTitle">Construção do Nosso Prédio</h3><p id="constructionPublicIntroduction">Conheça o projeto do espaço que está sendo preparado para acolher famílias, celebrar a fé e fortalecer nossa comunidade.</p></figcaption></figure><div class="construction-copy"><h4>Um sonho construído em unidade</h4><p id="constructionPublicDescription">Cada ambiente foi pensado para comunhão, ensino, adoração e cuidado. Veja algumas perspectivas do projeto e acompanhe as informações oficiais publicadas pela igreja.</p><div id="constructionPublicDetails"></div></div><div class="construction-gallery" aria-label="Imagens do projeto"><figure><img src="assets/images/gestao/projeto-auditorio-frontal.jpeg" alt="Vista frontal do projeto do auditório"><figcaption>Auditório — vista frontal</figcaption></figure><figure><img src="assets/images/gestao/projeto-auditorio-lateral.jpeg" alt="Vista lateral do projeto do auditório"><figcaption>Auditório — vista lateral</figcaption></figure><figure><img src="assets/images/gestao/projeto-auditorio-perspectiva.jpeg" alt="Perspectiva interna do projeto do auditório"><figcaption>Auditório — perspectiva interna</figcaption></figure></div></div></div>
     <div class="service-panel info-panel" data-panel="location"><h3>Onde Estamos</h3><div id="locationPublic"><p>O endereço oficial ainda não foi publicado.</p></div></div>`;
   const leadership = document.getElementById("lideranca");
   leadership?.after(services);
@@ -177,35 +177,52 @@
       testimonyBox.innerHTML =
         '<p class="pending-content">Nenhum testemunho publicado até o momento.</p>';
     if (giving.data) {
-      const box = document.getElementById("givingPublic");
-      box.replaceChildren();
-      const title = document.createElement("h4");
-      title.textContent = giving.data.title;
-      const explanation = document.createElement("p");
-      explanation.textContent = giving.data.explanation || "";
-      box.append(title, explanation);
-      infoRows(box, [
+      document.getElementById("givingPublicTitle").textContent =
+        giving.data.title || "Dízimos e Ofertas";
+      if (giving.data.explanation)
+        document.getElementById("givingPublicExplanation").textContent =
+          giving.data.explanation;
+      const details = document.querySelector("[data-giving-details]");
+      infoRows(details, [
         ["Chave PIX", giving.data.pix_key],
+        ["Tipo da chave", giving.data.pix_key_type],
         ["Favorecido", giving.data.beneficiary],
         ["Banco", giving.data.bank_name],
         ["Instruções", giving.data.instructions],
       ]);
+      if (giving.data.qr_code_path) {
+        const image = document.getElementById("givingQrImage");
+        image.src = /^https?:|^assets\//.test(giving.data.qr_code_path)
+          ? giving.data.qr_code_path
+          : db.storage
+              .from("church-public")
+              .getPublicUrl(giving.data.qr_code_path).data.publicUrl;
+      }
     }
     if (construction.data) {
-      const box = document.getElementById("constructionPublic");
-      box.replaceChildren();
-      for (const [tag, value] of [
-        ["h4", construction.data.title],
-        ["p", construction.data.introduction],
-        ["p", construction.data.description],
-        ["p", construction.data.objective],
-        ["p", construction.data.progress_text],
-      ])
-        if (value) {
-          const el = document.createElement(tag);
-          el.textContent = value;
-          box.append(el);
-        }
+      document.getElementById("constructionPublicTitle").textContent =
+        construction.data.title || "Construção do Nosso Prédio";
+      if (construction.data.introduction)
+        document.getElementById("constructionPublicIntroduction").textContent =
+          construction.data.introduction;
+      if (construction.data.description)
+        document.getElementById("constructionPublicDescription").textContent =
+          construction.data.description;
+      const details = document.getElementById("constructionPublicDetails");
+      infoRows(details, [
+        ["Objetivo", construction.data.objective],
+        ["Andamento", construction.data.progress_text],
+        ["Como contribuir", construction.data.giving_text],
+        ["Última atualização", construction.data.latest_update ? fmtDate(construction.data.latest_update) : ""],
+      ]);
+      if (construction.data.project_media_path) {
+        const image = document.getElementById("constructionHeroImage");
+        image.src = /^https?:|^assets\//.test(construction.data.project_media_path)
+          ? construction.data.project_media_path
+          : db.storage
+              .from("church-public")
+              .getPublicUrl(construction.data.project_media_path).data.publicUrl;
+      }
     }
     if (address.data) {
       const a = address.data;
