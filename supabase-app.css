@@ -1,1 +1,217 @@
-nav a[href="#admin"],#admin{display:none}.is-admin nav a[href="#admin"]{display:inline}.is-admin #admin{display:block}.calendar-archive,.legacy-library{display:none!important}.restricted-access{display:block;margin:25px 0 0;border:1px solid #ffffff2b;background:transparent;color:#9fb2a6;padding:9px 13px;font-size:.7rem;cursor:pointer}.auth-modal{position:fixed;inset:0;background:#07150de8;display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.auth-modal.open{display:flex}.auth-box{background:#fff;max-width:430px;width:100%;padding:38px;position:relative;text-align:center;border-radius:8px}.auth-close{position:absolute;right:14px;top:8px;border:0;background:none;font-size:2rem;cursor:pointer}.auth-box img{width:70px;height:70px;border-radius:50%;object-fit:cover}.auth-box>span{display:block;color:#286746;font-size:.62rem;letter-spacing:.14em;font-weight:800;margin:15px 0 8px}.auth-box h2{font:700 2rem Georgia;margin:0}.auth-box p{color:#66706a}.auth-box input{width:100%;padding:13px;border:1px solid #cbd6cd;border-radius:5px;margin:10px 0}.auth-box form button{width:100%;border:0;background:#173f2b;color:#fff;padding:13px;font-weight:800;border-radius:5px;cursor:pointer}#authMessage{margin-top:14px;font-size:.78rem}.success{color:#286746}.error{color:#a0443c}.cloud-word-archive{padding:80px max(6vw,28px);background:#fff}.cloud-heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:30px}.cloud-heading h2{font:700 clamp(2.3rem,4vw,4rem)/1 Georgia;margin:0}.cloud-heading p{color:#66706a}.cloud-heading>span{font-size:.72rem;color:#66706a}.cloud-words{display:grid;gap:10px}.cloud-word{display:grid;grid-template-columns:210px 1fr auto;align-items:center;gap:20px;border:1px solid #dfe5df;padding:18px}.cloud-date small{display:block;color:#286746;font-size:.58rem;letter-spacing:.13em;font-weight:800}.cloud-date strong{font-size:.85rem}.cloud-document{display:flex;align-items:center;gap:13px}.cloud-document>span{width:44px;height:44px;display:grid;place-items:center;background:#173f2b;color:#b8d557;font-size:.6rem;font-weight:800}.cloud-document h3{font:700 1.05rem Georgia;margin:0}.cloud-document p{font-size:.7rem;color:#66706a;margin:4px 0}.cloud-actions{display:flex;gap:6px}.cloud-actions a,.cloud-actions button{border:0;background:#edf3e9;color:#173f2b;padding:9px 11px;font-weight:800;font-size:.75rem;cursor:pointer;text-decoration:none}.cloud-actions button{display:none;background:#f8eeee;color:#964f46}.is-admin .cloud-actions button{display:block}.cloud-empty{text-align:center;padding:50px;background:#f7f9f6}.cloud-empty strong{font:700 1.3rem Georgia}.cloud-empty p{color:#66706a}@media(max-width:850px){.cloud-word{grid-template-columns:1fr}.cloud-actions{grid-column:1}.cloud-heading{align-items:start;gap:10px;flex-direction:column}}
+nav a[href="#admin"],
+#admin {
+  display: none;
+}
+.has-private-access nav a[href="#admin"] {
+  display: inline;
+}
+.has-private-access #admin {
+  display: block;
+}
+.calendar-archive,
+.legacy-library {
+  display: none !important;
+}
+.restricted-access {
+  display: block;
+  margin: 25px 0 0;
+  border: 1px solid #ffffff2b;
+  background: transparent;
+  color: #9fb2a6;
+  padding: 9px 13px;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+.auth-modal {
+  position: fixed;
+  inset: 0;
+  background: #07150de8;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+.auth-modal.open {
+  display: flex;
+}
+.auth-box {
+  background: #fff;
+  max-width: 430px;
+  width: 100%;
+  padding: 38px;
+  position: relative;
+  text-align: center;
+  border-radius: 8px;
+}
+.auth-close {
+  position: absolute;
+  right: 14px;
+  top: 8px;
+  border: 0;
+  background: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.auth-box img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.auth-box > span {
+  display: block;
+  color: #286746;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  font-weight: 800;
+  margin: 15px 0 8px;
+}
+.auth-box h2 {
+  font: 700 2rem Georgia;
+  margin: 0;
+}
+.auth-box p {
+  color: #66706a;
+}
+.auth-box input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #cbd6cd;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+.auth-box form button {
+  width: 100%;
+  border: 0;
+  background: #173f2b;
+  color: #fff;
+  padding: 13px;
+  font-weight: 800;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#authMessage {
+  margin-top: 14px;
+  font-size: 0.78rem;
+}
+.success {
+  color: #286746;
+}
+.error {
+  color: #a0443c;
+}
+.cloud-word-archive {
+  padding: 80px max(6vw, 28px);
+  background: #fff;
+}
+.cloud-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.cloud-heading h2 {
+  font: 700 clamp(2.3rem, 4vw, 4rem) / 1 Georgia;
+  margin: 0;
+}
+.cloud-heading p {
+  color: #66706a;
+}
+.cloud-heading > span {
+  font-size: 0.72rem;
+  color: #66706a;
+}
+.cloud-words {
+  display: grid;
+  gap: 10px;
+}
+.cloud-word {
+  display: grid;
+  grid-template-columns: 210px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #dfe5df;
+  padding: 18px;
+}
+.cloud-date small {
+  display: block;
+  color: #286746;
+  font-size: 0.58rem;
+  letter-spacing: 0.13em;
+  font-weight: 800;
+}
+.cloud-date strong {
+  font-size: 0.85rem;
+}
+.cloud-document {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.cloud-document > span {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: #173f2b;
+  color: #b8d557;
+  font-size: 0.6rem;
+  font-weight: 800;
+}
+.cloud-document h3 {
+  font: 700 1.05rem Georgia;
+  margin: 0;
+}
+.cloud-document p {
+  font-size: 0.7rem;
+  color: #66706a;
+  margin: 4px 0;
+}
+.cloud-actions {
+  display: flex;
+  gap: 6px;
+}
+.cloud-actions a,
+.cloud-actions button {
+  border: 0;
+  background: #edf3e9;
+  color: #173f2b;
+  padding: 9px 11px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+.cloud-actions button {
+  display: none;
+  background: #f8eeee;
+  color: #964f46;
+}
+.is-admin .cloud-actions button {
+  display: block;
+}
+.cloud-empty {
+  text-align: center;
+  padding: 50px;
+  background: #f7f9f6;
+}
+.cloud-empty strong {
+  font: 700 1.3rem Georgia;
+}
+.cloud-empty p {
+  color: #66706a;
+}
+@media (max-width: 850px) {
+  .cloud-word {
+    grid-template-columns: 1fr;
+  }
+  .cloud-actions {
+    grid-column: 1;
+  }
+  .cloud-heading {
+    align-items: start;
+    gap: 10px;
+    flex-direction: column;
+  }
+}

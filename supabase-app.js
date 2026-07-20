@@ -1,28 +1,223 @@
-const SUPABASE_URL='https://lzytpdkqdiamlikvvcuu.supabase.co';
-const SUPABASE_KEY='sb_publishable_nHnpCMyEPgUdMtPph-Ar9A_A2-7O6o3';
-const ADMIN_EMAIL='matheus.costa71@outlook.com';
-const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const adminSection=document.getElementById('admin');
-const adminNav=document.querySelector('nav a[href="#admin"]');
-const publicWordSection=document.getElementById('palavra');
-let currentSession=null;
+const SUPABASE_URL = "https://lzytpdkqdiamlikvvcuu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_nHnpCMyEPgUdMtPph-Ar9A_A2-7O6o3";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+window.videiraSupabase = sb;
+const adminSection = document.getElementById("admin");
+const adminNav = document.querySelector('nav a[href="#admin"]');
+const publicWordSection = document.getElementById("palavra");
+let currentSession = null;
 
-const accessButton=document.createElement('button');
-accessButton.className='restricted-access';accessButton.textContent='Área restrita';
-document.querySelector('footer')?.appendChild(accessButton);
-const authModal=document.createElement('div');authModal.className='auth-modal';authModal.innerHTML=`<div class="auth-box"><button class="auth-close" aria-label="Fechar">×</button><img src="logo-videira.png" alt="Igreja Videira"><span>ACESSO ADMINISTRATIVO</span><h2>Entrar no Painel</h2><p>Um link seguro será enviado ao e-mail autorizado.</p><form id="adminLoginForm"><input type="email" id="adminLoginEmail" placeholder="seu@email.com" required><button type="submit">Enviar link de acesso</button></form><div id="authMessage"></div></div>`;document.body.appendChild(authModal);
-accessButton.addEventListener('click',async()=>{if(currentSession){await sb.auth.signOut();return}authModal.classList.add('open')});
-authModal.querySelector('.auth-close').addEventListener('click',()=>authModal.classList.remove('open'));
-authModal.addEventListener('click',event=>{if(event.target===authModal)authModal.classList.remove('open')});
-document.getElementById('adminLoginForm').addEventListener('submit',async event=>{event.preventDefault();const email=document.getElementById('adminLoginEmail').value.trim().toLowerCase();const message=document.getElementById('authMessage');if(email!==ADMIN_EMAIL){message.textContent='Este e-mail não possui acesso ao Painel.';message.className='error';return}message.textContent='Enviando link seguro...';message.className='';const redirectTo=location.origin+location.pathname;const{error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:redirectTo}});if(error){message.textContent='Não foi possível enviar: '+error.message;message.className='error'}else{message.textContent='Link enviado. Confira sua caixa de entrada e o lixo eletrônico.';message.className='success'}});
-function setAdminSession(session){currentSession=session;const allowed=session?.user?.email?.toLowerCase()===ADMIN_EMAIL;document.body.classList.toggle('is-admin',allowed);accessButton.textContent=allowed?'Sair do Painel':'Área restrita';if(!allowed&&session)sb.auth.signOut();if(allowed&&location.hash==='#admin')adminSection?.scrollIntoView()}
-sb.auth.getSession().then(({data})=>setAdminSession(data.session));sb.auth.onAuthStateChange((_event,session)=>setAdminSession(session));
+const accessButton = document.createElement("button");
+accessButton.className = "restricted-access";
+accessButton.textContent = "Área restrita";
+document.querySelector("footer")?.appendChild(accessButton);
+const authModal = document.createElement("div");
+authModal.className = "auth-modal";
+authModal.innerHTML = `<div class="auth-box"><button class="auth-close" aria-label="Fechar">×</button><img src="logo-videira.png" alt="Igreja Videira"><span>ACESSO SEGURO</span><h2>Entrar no sistema</h2><p>Um link seguro será enviado ao seu e-mail cadastrado.</p><form id="adminLoginForm"><label for="adminLoginEmail">E-mail</label><input type="email" id="adminLoginEmail" placeholder="seu@email.com" autocomplete="email" required><button type="submit">Enviar link de acesso</button></form><div id="authMessage" role="status"></div></div>`;
+document.body.appendChild(authModal);
+accessButton.addEventListener("click", async () => {
+  if (currentSession) {
+    await sb.auth.signOut();
+    return;
+  }
+  authModal.classList.add("open");
+});
+authModal
+  .querySelector(".auth-close")
+  .addEventListener("click", () => authModal.classList.remove("open"));
+authModal.addEventListener("click", (event) => {
+  if (event.target === authModal) authModal.classList.remove("open");
+});
+document
+  .getElementById("adminLoginForm")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = document
+      .getElementById("adminLoginEmail")
+      .value.trim()
+      .toLowerCase();
+    const message = document.getElementById("authMessage");
+    message.textContent = "Enviando link seguro...";
+    message.className = "";
+    const redirectTo = location.origin + location.pathname;
+    const { error } = await sb.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: redirectTo, shouldCreateUser: true },
+    });
+    if (error) {
+      message.textContent = "Não foi possível enviar o link. Tente novamente.";
+      message.className = "error";
+    } else {
+      message.textContent =
+        "Link enviado. Confira sua caixa de entrada e o lixo eletrônico.";
+      message.className = "success";
+    }
+  });
+async function setAdminSession(session) {
+  currentSession = session;
+  let profile = null,
+    roles = [];
+  if (session) {
+    const [profileResult, rolesResult] = await Promise.all([
+      sb
+        .from("profiles")
+        .select("id,full_name,email,is_active")
+        .eq("id", session.user.id)
+        .maybeSingle(),
+      sb.from("user_roles").select("role").eq("user_id", session.user.id),
+    ]);
+    profile = profileResult.data || {
+      id: session.user.id,
+      full_name: session.user.email?.split("@")[0],
+      email: session.user.email,
+      is_active: true,
+    };
+    roles = (rolesResult.data || []).map((item) => item.role);
+  }
+  const canManage = roles.some((role) =>
+    ["superadmin", "admin"].includes(role),
+  );
+  const privateAccess = roles.some((role) =>
+    ["superadmin", "admin", "pastor", "leader"].includes(role),
+  );
+  document.body.classList.toggle("is-admin", canManage);
+  document.body.classList.toggle("has-private-access", privateAccess);
+  accessButton.textContent = session ? "Sair do sistema" : "Área restrita";
+  window.churchAuth = {
+    session,
+    profile,
+    roles,
+    hasRole: (...wanted) => wanted.some((role) => roles.includes(role)),
+    canManageContent: () => canManage,
+    privateAccess,
+  };
+  window.dispatchEvent(
+    new CustomEvent("church-auth-changed", { detail: window.churchAuth }),
+  );
+  if (privateAccess && location.hash === "#admin")
+    adminSection?.scrollIntoView();
+}
+sb.auth.getSession().then(({ data }) => setAdminSession(data.session));
+sb.auth.onAuthStateChange((_event, session) => setAdminSession(session));
 
-const cloudArchive=document.createElement('section');cloudArchive.className='cloud-word-archive';cloudArchive.innerHTML=`<div class="cloud-heading"><div><span class="eyebrow">Palavra da semana</span><h2>Arquivo de mensagens</h2><p>Esboços disponíveis para leitura e download.</p></div><span id="cloudStatus">Carregando...</span></div><div id="cloudWords" class="cloud-words"></div>`;publicWordSection?.after(cloudArchive);
-function rangeLabel(start,end){const a=new Date(start+'T12:00:00'),b=new Date(end+'T12:00:00');return`${String(a.getDate()).padStart(2,'0')} a ${String(b.getDate()).padStart(2,'0')} de ${b.toLocaleDateString('pt-BR',{month:'long'})}`}
-async function loadCloudWords(){const status=document.getElementById('cloudStatus');const container=document.getElementById('cloudWords');const{data,error}=await sb.from('palavras').select('*').order('semana_inicio',{ascending:false});if(error){status.textContent='Configuração pendente';container.innerHTML='<div class="cloud-empty"><strong>Arquivo online sendo configurado</strong><p>As mensagens aparecerão aqui após a configuração do banco.</p></div>';return}status.textContent=`${data.length} ${data.length===1?'mensagem':'mensagens'}`;container.innerHTML=data.length?data.map(item=>{const{data:urlData}=sb.storage.from('palavras').getPublicUrl(item.storage_path);const url=urlData.publicUrl;return`<article class="cloud-word"><div class="cloud-date"><small>SEMANA</small><strong>${rangeLabel(item.semana_inicio,item.semana_fim)}</strong></div><div class="cloud-document"><span>${item.arquivo_nome.split('.').pop().toUpperCase()}</span><div><h3>${safeText(item.titulo)}</h3><p>${safeText(item.arquivo_nome)}</p></div></div><div class="cloud-actions"><a href="${url}" target="_blank" rel="noopener">Abrir</a><a href="${url}?download=${encodeURIComponent(item.arquivo_nome)}">Baixar</a><button data-cloud-delete="${item.id}" data-storage-path="${safeText(item.storage_path)}">Excluir</button></div></article>`}).join(''):'<div class="cloud-empty"><strong>Nenhuma mensagem publicada</strong><p>O primeiro PDF aparecerá aqui após ser enviado pelo administrador.</p></div>'}
-function safeText(value){const div=document.createElement('div');div.textContent=value||'';return div.innerHTML}
+const cloudArchive = document.createElement("section");
+cloudArchive.className = "cloud-word-archive";
+cloudArchive.innerHTML = `<div class="cloud-heading"><div><span class="eyebrow">Palavra da semana</span><h2>Arquivo de mensagens</h2><p>Esboços disponíveis para leitura e download.</p></div><span id="cloudStatus">Carregando...</span></div><div id="cloudWords" class="cloud-words"></div>`;
+publicWordSection?.after(cloudArchive);
+function rangeLabel(start, end) {
+  const a = new Date(start + "T12:00:00"),
+    b = new Date(end + "T12:00:00");
+  return `${String(a.getDate()).padStart(2, "0")} a ${String(b.getDate()).padStart(2, "0")} de ${b.toLocaleDateString("pt-BR", { month: "long" })}`;
+}
+async function loadCloudWords() {
+  const status = document.getElementById("cloudStatus");
+  const container = document.getElementById("cloudWords");
+  const { data, error } = await sb
+    .from("palavras")
+    .select("*")
+    .order("semana_inicio", { ascending: false });
+  if (error) {
+    status.textContent = "Configuração pendente";
+    container.innerHTML =
+      '<div class="cloud-empty"><strong>Arquivo online sendo configurado</strong><p>As mensagens aparecerão aqui após a configuração do banco.</p></div>';
+    return;
+  }
+  status.textContent = `${data.length} ${data.length === 1 ? "mensagem" : "mensagens"}`;
+  container.innerHTML = data.length
+    ? data
+        .map((item) => {
+          const { data: urlData } = sb.storage
+            .from("palavras")
+            .getPublicUrl(item.storage_path);
+          const url = urlData.publicUrl;
+          return `<article class="cloud-word"><div class="cloud-date"><small>SEMANA</small><strong>${rangeLabel(item.semana_inicio, item.semana_fim)}</strong></div><div class="cloud-document"><span>${item.arquivo_nome.split(".").pop().toUpperCase()}</span><div><h3>${safeText(item.titulo)}</h3><p>${safeText(item.arquivo_nome)}</p></div></div><div class="cloud-actions"><a href="${url}" target="_blank" rel="noopener">Abrir</a><a href="${url}?download=${encodeURIComponent(item.arquivo_nome)}">Baixar</a><button data-cloud-delete="${item.id}" data-storage-path="${safeText(item.storage_path)}">Excluir</button></div></article>`;
+        })
+        .join("")
+    : '<div class="cloud-empty"><strong>Nenhuma mensagem publicada</strong><p>O primeiro PDF aparecerá aqui após ser enviado pelo administrador.</p></div>';
+}
+function safeText(value) {
+  const div = document.createElement("div");
+  div.textContent = value || "";
+  return div.innerHTML;
+}
 loadCloudWords();
 
-const oldSave=document.getElementById('saveWordFile');if(oldSave){const cloudSave=oldSave.cloneNode(true);cloudSave.id='saveCloudWord';cloudSave.textContent='Publicar para todos';oldSave.replaceWith(cloudSave);cloudSave.addEventListener('click',async()=>{if(!currentSession||currentSession.user.email.toLowerCase()!==ADMIN_EMAIL)return alert('Faça login como administrador.');const file=document.getElementById('wordFile').files[0];const start=document.getElementById('wordWeekStart').value;const end=document.getElementById('wordWeekEnd').value;const title=document.getElementById('adminWordTitle').value.trim()||file?.name.replace(/\.[^.]+$/,'');if(!file)return alert('Selecione um arquivo Word ou PDF.');if(!start||!end)return alert('Informe o início e o fim da semana.');if(new Date(end)<new Date(start))return alert('Confira o período da semana.');if(file.size>15*1024*1024)return alert('O arquivo deve ter no máximo 15 MB.');const extension=file.name.split('.').pop().toLowerCase();if(!['pdf','doc','docx'].includes(extension))return alert('Envie um arquivo Word ou PDF.');cloudSave.disabled=true;cloudSave.textContent='Publicando...';const cleanName=file.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9._-]/g,'-');const path=`${start.slice(0,7)}/${Date.now()}-${cleanName}`;const upload=await sb.storage.from('palavras').upload(path,file,{contentType:file.type,upsert:false});if(upload.error){alert('Erro ao enviar: '+upload.error.message);cloudSave.disabled=false;cloudSave.textContent='Publicar para todos';return}const insert=await sb.from('palavras').insert({titulo:title,semana_inicio:start,semana_fim:end,arquivo_nome:file.name,storage_path:path,mime_type:file.type});if(insert.error){await sb.storage.from('palavras').remove([path]);alert('Erro ao salvar: '+insert.error.message)}else{document.getElementById('wordFile').value='';document.getElementById('selectedWordFile').textContent='Arquivo publicado com sucesso';await loadCloudWords();location.hash='palavra'}cloudSave.disabled=false;cloudSave.textContent='Publicar para todos'})}
-document.getElementById('cloudWords').addEventListener('click',async event=>{if(!event.target.dataset.cloudDelete)return;if(!currentSession||currentSession.user.email.toLowerCase()!==ADMIN_EMAIL)return;if(!confirm('Excluir esta Palavra para todos?'))return;const id=event.target.dataset.cloudDelete,path=event.target.dataset.storagePath;const removed=await sb.storage.from('palavras').remove([path]);if(removed.error)return alert(removed.error.message);const deleted=await sb.from('palavras').delete().eq('id',id);if(deleted.error)return alert(deleted.error.message);loadCloudWords()});
+const oldSave = document.getElementById("saveWordFile");
+if (oldSave) {
+  const cloudSave = oldSave.cloneNode(true);
+  cloudSave.id = "saveCloudWord";
+  cloudSave.textContent = "Publicar para todos";
+  oldSave.replaceWith(cloudSave);
+  cloudSave.addEventListener("click", async () => {
+    if (!window.churchAuth?.canManageContent())
+      return alert("Faça login como administrador.");
+    const file = document.getElementById("wordFile").files[0];
+    const start = document.getElementById("wordWeekStart").value;
+    const end = document.getElementById("wordWeekEnd").value;
+    const title =
+      document.getElementById("adminWordTitle").value.trim() ||
+      file?.name.replace(/\.[^.]+$/, "");
+    if (!file) return alert("Selecione um arquivo Word ou PDF.");
+    if (!start || !end) return alert("Informe o início e o fim da semana.");
+    if (new Date(end) < new Date(start))
+      return alert("Confira o período da semana.");
+    if (file.size > 15 * 1024 * 1024)
+      return alert("O arquivo deve ter no máximo 15 MB.");
+    const extension = file.name.split(".").pop().toLowerCase();
+    if (!["pdf", "doc", "docx"].includes(extension))
+      return alert("Envie um arquivo Word ou PDF.");
+    cloudSave.disabled = true;
+    cloudSave.textContent = "Publicando...";
+    const cleanName = file.name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-zA-Z0-9._-]/g, "-");
+    const path = `${start.slice(0, 7)}/${Date.now()}-${cleanName}`;
+    const upload = await sb.storage
+      .from("palavras")
+      .upload(path, file, { contentType: file.type, upsert: false });
+    if (upload.error) {
+      alert("Erro ao enviar: " + upload.error.message);
+      cloudSave.disabled = false;
+      cloudSave.textContent = "Publicar para todos";
+      return;
+    }
+    const insert = await sb
+      .from("palavras")
+      .insert({
+        titulo: title,
+        semana_inicio: start,
+        semana_fim: end,
+        arquivo_nome: file.name,
+        storage_path: path,
+        mime_type: file.type,
+      });
+    if (insert.error) {
+      await sb.storage.from("palavras").remove([path]);
+      alert("Erro ao salvar: " + insert.error.message);
+    } else {
+      document.getElementById("wordFile").value = "";
+      document.getElementById("selectedWordFile").textContent =
+        "Arquivo publicado com sucesso";
+      await loadCloudWords();
+      location.hash = "palavra";
+    }
+    cloudSave.disabled = false;
+    cloudSave.textContent = "Publicar para todos";
+  });
+}
+document
+  .getElementById("cloudWords")
+  .addEventListener("click", async (event) => {
+    if (!event.target.dataset.cloudDelete) return;
+    if (!window.churchAuth?.canManageContent())
+      return;
+    if (!confirm("Excluir esta publicação para todos?")) return;
+    const id = event.target.dataset.cloudDelete,
+      path = event.target.dataset.storagePath;
+    const removed = await sb.storage.from("palavras").remove([path]);
+    if (removed.error) return alert(removed.error.message);
+    const deleted = await sb.from("palavras").delete().eq("id", id);
+    if (deleted.error) return alert(deleted.error.message);
+    loadCloudWords();
+  });
